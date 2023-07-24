@@ -1,11 +1,3 @@
-var urlParams = new URLSearchParams(window.location.search);
-var quizId = urlParams.get('quiz');
-if (quizId && quizzes[quizId]) {
-    currentQuiz = quizzes[quizId];
-    displayQuiz();
-}
-
-
 var quizzes = {
     ktmt: [
         {
@@ -28,9 +20,9 @@ var quizzes = {
 
 var currentQuiz = null;
 
-function loadQuiz() {
-    var quizSelect = document.getElementById("quizSelect");
-    var quizId = quizSelect.value;
+var urlParams = new URLSearchParams(window.location.search);
+var quizId = urlParams.get('quiz');
+if (quizId && quizzes[quizId]) {
     currentQuiz = quizzes[quizId];
     displayQuiz();
 }
