@@ -27,6 +27,21 @@ if (quizId && quizzes[quizId]) {
     displayQuiz();
 }
 
+function showModal(text) {
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    document.getElementById("modalText").textContent = text;
+    modal.style.display = "block";
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
 function displayQuiz() {
     var quizDiv = document.getElementById("quiz");
     quizDiv.innerHTML = "";
@@ -63,7 +78,7 @@ function submitQuiz() {
             }
         }
         if (answer === null) {
-            alert("Bạn chưa trả lời tất cả các câu hỏi!");
+            showModal("Bạn chưa trả lời tất cả các câu hỏi!");
             return;
         }
         if (answer == question.correctAnswer) {
@@ -75,9 +90,11 @@ function submitQuiz() {
             userAnswer: answer !== null ? question.answers[answer] : null
         });
     }
-    if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
-        return;
+    showModal("Bạn có chắc chắn muốn nộp bài không?");
+    var modal = document.getElementById("myModal");
+    modal.onclick = function() {
+        modal.style.display = "none";
+        localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
+        showModal("Bạn đã trả lời đúng " + score + " câu hỏi!");
     }
-    localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
-    alert("Bạn đã trả lời đúng " + score + " câu hỏi!");
 }
