@@ -51,7 +51,17 @@
             quizDiv.appendChild(questionDiv);
         }
     }
+    function showConfirmModal(message, confirmCallback) {
+        if (window.confirm(message)) {
+            confirmCallback();
+        }
+    }
 
+    function showWarningModal(message, confirmCallback) {
+        if (window.confirm(message)) {
+            confirmCallback();
+        }
+    }
     function submitQuiz() {
         var score = 0;
         var result = [];
