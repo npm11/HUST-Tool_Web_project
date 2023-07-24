@@ -21,11 +21,12 @@
         <div id="questionDisplay" class="question-display"></div>
     </div>
     <button onclick="submitQuiz()">Nộp bài</button>
-    <div id="resultPopup" class="popup">
+    <div id="confirmPopup" class="popup">
         <div class="popup-content">
-            <h2>Kết quả</h2>
-            <div id="result"></div>
-            <button onclick="closePopup()">Đóng</button>
+            <h2>Xác nhận</h2>
+            <p>Bạn có chắc chắn muốn nộp bài không?</p>
+            <button onclick="confirmSubmit()">Có</button>
+            <button onclick="closePopup('confirmPopup')">Không</button>
         </div>
     </div>
     
