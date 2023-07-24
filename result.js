@@ -12,20 +12,20 @@ window.onload = function() {
     resultDiv.appendChild(scoreText);
     for (var i = 0; i < result.length; i++) {
         var resultText = document.createElement("p");
-        if (result[i].userAnswer !== null && result[i].userAnswer !== "") {
-            var correctAnswer = result[i].correctAnswer;
-            if (typeof correctAnswer === 'number') {
-                correctAnswer = String.fromCharCode(65 + correctAnswer);
-            } else if (correctAnswer === "Đáp án") {
-                correctAnswer = "KTMT";
-            }
-            var userAnswer = result[i].userAnswer;
+        var correctAnswer = result[i].correctAnswer;
+        if (typeof correctAnswer === 'number') {
+            correctAnswer = String.fromCharCode(65 + correctAnswer);
+        } else if (correctAnswer === "Đáp án") {
+            correctAnswer = "KTMT";
+        }
+        var userAnswer = result[i].userAnswer;
+        if (userAnswer !== null && userAnswer !== "") {
             if (typeof userAnswer === 'number') {
                 userAnswer = String.fromCharCode(65 + userAnswer);
             }
             resultText.textContent = result[i].question + ": Đáp án đúng là " + correctAnswer + ", bạn đã chọn " + userAnswer;
         } else {
-            resultText.textContent = result[i].question + ": Bạn không điền đáp án.";
+            resultText.textContent = result[i].question + ": Đáp án đúng là " + correctAnswer + ", bạn không điền đáp án.";
         }
         resultDiv.appendChild(resultText);
     }
