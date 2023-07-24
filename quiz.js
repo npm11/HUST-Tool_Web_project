@@ -92,13 +92,17 @@
                 var question = currentQuiz[i];
                 var answerInputs = document.getElementsByName("question" + i);
                 var answer = null;
-                for (var j = 0; j < answerInputs.length; j++) {
-                    if (answerInputs[j].checked) {
-                        answer = j;
-                        break;
+                if (question.type === "multiple_choice") {
+                    for (var j = 0; j < answerInputs.length; j++) {
+                        if (answerInputs[j].checked) {
+                            answer = j;
+                            break;
+                        }
                     }
+                } else if (question.type === "fill_in") {
+                    answer = answerInputs[0].value;
                 }
-                if (answer === null) {
+                if (answer === null || answer === "") {
                     unanswered = true;
                     console.log("Câu hỏi " + (i + 1) + " chưa được trả lời.");
                 }
@@ -107,10 +111,11 @@
                 }
                 result.push({
                     question: question.question,
-                    correctAnswer: question.answers[question.correctAnswer],
-                    userAnswer: answer !== null ? question.answers[answer] : null
+                    correctAnswer: question.correctAnswer,
+                    userAnswer: answer !== null ? answer : null
                 });
             }
+        
             if (unanswered) {
                 showWarningModal("Còn câu hỏi chưa được trả lời! Bạn có muốn vẫn nộp bài?", function() {
                     // Nộp bài dù có câu chưa trả lời
@@ -127,6 +132,7 @@
                 });
             }
         }
+        
     }
 
     var urlParams = new URLSearchParams(window.location.search);
