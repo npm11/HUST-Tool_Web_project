@@ -1,15 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Results</title>
-    <meta http-equiv='cache-control' content='no-cache'> 
-    <meta http-equiv='expires' content='0'> 
-    <meta http-equiv='pragma' content='no-cache'>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Quiz Results</h1>
-    <div id="result"></div>
-    <script src="result.js"></script>
+    <div class="container">
+        <div id="result" class="mt-5"></div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            var data = JSON.parse(localStorage.getItem('myUniqueKey'));
+            if (data === null) {
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger'>Bạn chưa tham gia thi.</div>";
+                return;
+            }
+            var result = data.result;
+            var score = data.score;
+            var resultDiv = document.getElementById("result");
+            var scoreText = document.createElement("div");
+            scoreText.className = "alert alert-primary";
+            scoreText.textContent = "Điểm của bạn: " + score;
+            resultDiv.appendChild(scoreText);
+            for (var i = 0; i < result.length; i++) {
+                var resultText = document.createElement("div");
+                resultText.className = "alert alert-info";
+                var correctAnswer = result[i].correctAnswer;
+                if (typeof correctAnswer === 'number') {
+                    correctAnswer = String.fromCharCode(65 + correctAnswer);
+                } else if (correctAnswer === "Đáp án") {
+                    correctAnswer = "KTMT";
+                }
+                var userAnswer = result[i].userAnswer;
+                if (userAnswer !== null && userAnswer !== "") {
+                    if (typeof userAnswer === 'number') {
+                        userAnswer = String.fromCharCode(65 + userAnswer);
+                    }
+                    resultText.textContent = "Câu hỏi " + (i + 1) + ": Đáp án đúng là " + correctAnswer + ", bạn đã chọn " + userAnswer + ".";
+                } else {
+                    resultText.textContent = "Câu hỏi " + (i + 1) + ": Đáp án đúng là " + correctAnswer + ", bạn không điền đáp án.";
+                }
+                resultDiv.appendChild(resultText);
+            }
+            localStorage.removeItem('myUniqueKey'); // Xóa dữ liệu từ localStorage
+        };
+    </script>
 </body>
 </html>

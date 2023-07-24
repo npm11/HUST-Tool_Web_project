@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <title>Quiz</title>
     <meta http-equiv='cache-control' content='no-cache'> 
     <meta http-equiv='expires' content='0'> 
@@ -12,8 +13,8 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p id="confirmModalText"></p>
-            <button id="confirmModalYes">Yes</button>
-            <button id="confirmModalNo">No</button>
+            <button id="confirmModalYes" class="btn btn-primary">Yes</button>
+            <button id="confirmModalNo" class="btn btn-secondary">No</button>
         </div>
     </div>
     
@@ -21,23 +22,27 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p id="warningModalText"></p>
-            <button id="warningModalYes">Yes</button>
-            <button id="warningModalNo">No</button>
+            <button id="warningModalYes" class="btn btn-primary">Yes</button>
+            <button id="warningModalNo" class="btn btn-secondary">No</button>
         </div>
     </div>        
-    <nav>
-        <button onclick="location.href='index.html'">Trang chủ 5</button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button onclick="location.href='index.html'" class="btn btn-primary">Trang chủ</button>
         <div class="dropdown">
-            <button class="dropbtn">Thi thử</button>
-            <div class="dropdown-content">
-                <a href="quiz.html?quiz=ktmt">KTMT</a>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Thi thử
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="quiz.html?quiz=ktmt">KTMT</a>
                 <!-- Add more quizzes here -->
             </div>
         </div>
     </nav>
-    <h1>Quiz</h1>
-    <form id="quiz" onsubmit="event.preventDefault(); submitQuiz();"></form>
-    <button type="submit" form="quiz">Submit Quiz</button>
+    <h1 class="text-center">Quiz</h1>
+    <div class="container">
+        <form id="quiz" onsubmit="event.preventDefault(); submitQuiz();"></form>
+        <button type="submit" form="quiz" class="btn btn-primary mt-3">Submit Quiz</button>
+    </div>
     <script src="quiz.js"></script>
 </body>
 </html>
