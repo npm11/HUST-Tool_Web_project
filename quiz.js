@@ -22,54 +22,35 @@
     };
 
     var currentQuiz = null;
-    var currentQuestion = 0;
 
     function displayQuiz() {
         var quizDiv = document.getElementById("quiz");
-        var questionTable = document.getElementById("questionTable");
         quizDiv.innerHTML = "";
-        questionTable.innerHTML = "";
-        var question = currentQuiz[currentQuestion];
-        var questionDiv = document.createElement("div");
-        questionDiv.textContent = question.question;
-        quizDiv.appendChild(questionDiv);
-
-        if (question.type === "multiple_choice") {
-            for (var j = 0; j < question.answers.length; j++) {
-                var answer = question.answers[j];
-                var answerInput = document.createElement("input");
-                answerInput.type = "radio";
-                answerInput.name = "question" + currentQuestion;
-                answerInput.value = j;
-                var answerLabel = document.createElement("label");
-                answerLabel.textContent = answer;
-                questionDiv.appendChild(answerInput);
-                questionDiv.appendChild(answerLabel);
-            }
-        } else if (question.type === "fill_in") {
-            var answerInput = document.createElement("input");
-            answerInput.type = "text";
-            answerInput.name = "question" + currentQuestion;
-            questionDiv.appendChild(answerInput);
-        }
-
         for (var i = 0; i < currentQuiz.length; i++) {
-            var questionButton = document.createElement("button");
-            questionButton.textContent = "Câu hỏi " + (i + 1);
-            questionButton.onclick = (function(index) {
-                return function() {
-                    currentQuestion = index;
-                    displayQuiz();
-                };
-            })(i);
-            questionTable.appendChild(questionButton);
-        }
-
-        if (currentQuestion < questionTable.children.length) {
-            questionTable.children[currentQuestion].style.backgroundColor = "gray";
+            var question = currentQuiz[i];
+            var questionDiv = document.createElement("div");
+            questionDiv.textContent = question.question;
+            if (question.type === "multiple_choice") {
+                for (var j = 0; j < question.answers.length; j++) {
+                    var answer = question.answers[j];
+                    var answerInput = document.createElement("input");
+                    answerInput.type = "radio";
+                    answerInput.name = "question" + i;
+                    answerInput.value = j;
+                    var answerLabel = document.createElement("label");
+                    answerLabel.textContent = answer;
+                    questionDiv.appendChild(answerInput);
+                    questionDiv.appendChild(answerLabel);
+                }
+            } else if (question.type === "fill_in") {
+                var answerInput = document.createElement("input");
+                answerInput.type = "text";
+                answerInput.name = "question" + i;
+                questionDiv.appendChild(answerInput);
+            }
+            quizDiv.appendChild(questionDiv);
         }
     }
-
     function showConfirmModal(message, confirmCallback) {
         var modal = document.getElementById("confirmModal");
         var span = document.getElementsByClassName("close")[0];
@@ -85,7 +66,7 @@
             modal.style.display = "none";
         }
     }
-
+    
     function showWarningModal(message, confirmCallback) {
         var modal = document.getElementById("warningModal");
         var span = document.getElementsByClassName("close")[1];
@@ -101,7 +82,8 @@
             modal.style.display = "none";
         }
     }
-
+    
+    
     function submitQuiz() {
         var score = 0;
         var result = [];
@@ -133,55 +115,45 @@
                 userAnswer: answer !== null ? answer : null
             });
         }
-
+    
         if (unanswered) {
-            showWarningModal("Còn câu hỏi chưa được trả lời. Bạn có muốn nộp bài không?", function() {
-                localStorage.setItem("quizResult", JSON.stringify(result));
-                localStorage.setItem("quizScore", score);
-                window.location.href = "result.html";
+            showWarningModal("Còn câu hỏi chưa được trả lời! Bạn có muốn vẫn nộp bài?", function() {
+                // Nộp bài dù có câu chưa trả lời
+                console.log("Nộp bài dù có câu chưa trả lời");
+                localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
+                window.location.href = 'result.html'; // Thay thế hàm showModal
             });
         } else {
-            showConfirmModal("Bạn có chắc chắn muốn nộp bài không?", function() {
-                localStorage.setItem("quizResult", JSON.stringify(result));
-                localStorage.setItem("quizScore", score);
-                window.location.href = "result.html";
+            showConfirmModal("Bạn đã hoàn thành tất cả câu hỏi. Bạn có chắc chắn muốn nộp bài?", function() {
+                // Nộp bài
+                console.log("Nộp bài");
+                localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
+                window.location.href = 'result.html'; // Thay thế hàm showModal
             });
         }
     }
+    
 
-    function nextQuestion() {
-        if (currentQuestion < currentQuiz.length - 1) {
-            currentQuestion++;
-            displayQuiz();
-        }
+    var urlParams = new URLSearchParams(window.location.search);
+    var quizId = urlParams.get('quiz');
+    if (quizId && quizzes[quizId]) {
+        currentQuiz = quizzes[quizId];
+        displayQuiz();
     }
 
-    function previousQuestion() {
-        if (currentQuestion > 0) {
-            currentQuestion--;
-            displayQuiz();
-        }
-    }
-
-    window.onload = function() {
-        var quizName = new URLSearchParams(window.location.search).get("quiz");
-        currentQuiz = quizzes[quizName];
-        if (currentQuiz) {
-            displayQuiz();
-        } else {
-            alert("Quiz không tồn tại.");
-        }
-        var submitQuizButton = document.getElementById("submitQuiz");
-        var nextQuestionButton = document.getElementById("nextQuestion");
-        var previousQuestionButton = document.getElementById("previousQuestion");
-        if(submitQuizButton) {
-            submitQuizButton.onclick = submitQuiz;
-        }
-        if(nextQuestionButton) {
-            nextQuestionButton.onclick = nextQuestion;
-        }
-        if(previousQuestionButton) {
-            previousQuestionButton.onclick = previousQuestion;
-        }
-    };
+    // Expose the functions to the global scope
+    window.displayQuiz = displayQuiz;
+    window.submitQuiz = submitQuiz;
 })();
+
+
+
+
+
+
+
+
+
+
+
+
