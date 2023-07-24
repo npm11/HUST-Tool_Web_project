@@ -104,6 +104,7 @@ function displayQuiz() {
 function submitQuiz() {
     var score = 0;
     var result = [];
+    var unanswered = false;
     for (var i = 0; i < currentQuiz.length; i++) {
         var question = currentQuiz[i];
         var answerInputs = document.getElementsByName("question" + i);
@@ -115,13 +116,7 @@ function submitQuiz() {
             }
         }
         if (answer === null) {
-            showWarningModal("Còn câu hỏi chưa được trả lời! Bạn có muốn vẫn nộp bài?", function() {
-                // Nộp bài dù có câu chưa trả lời
-                console.log("Nộp bài dù có câu chưa trả lời");
-                localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
-                window.location.href = 'result.html'; // Thay thế hàm showModal
-            });
-            return;
+            unanswered = true;
         }
         if (answer == question.correctAnswer) {
             score++;
@@ -132,10 +127,20 @@ function submitQuiz() {
             userAnswer: answer !== null ? question.answers[answer] : null
         });
     }
-    showConfirmModal("Bạn đã hoàn thành tất cả câu hỏi. Bạn có chắc chắn muốn nộp bài?", function() {
-        // Nộp bài
-        console.log("Nộp bài");
-        localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
-        window.location.href = 'result.html'; // Thay thế hàm showModal
-    });
+    if (unanswered) {
+        showWarningModal("Còn câu hỏi chưa được trả lời! Bạn có muốn vẫn nộp bài?", function() {
+            // Nộp bài dù có câu chưa trả lời
+            console.log("Nộp bài dù có câu chưa trả lời");
+            localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
+            window.location.href = 'result.html'; // Thay thế hàm showModal
+        });
+    } else {
+        showConfirmModal("Bạn đã hoàn thành tất cả câu hỏi. Bạn có chắc chắn muốn nộp bài?", function() {
+            // Nộp bài
+            console.log("Nộp bài");
+            localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
+            window.location.href = 'result.html'; // Thay thế hàm showModal
+        });
+    }
 }
+
