@@ -119,7 +119,7 @@ function submitQuiz() {
                 // Nộp bài dù có câu chưa trả lời
                 console.log("Nộp bài dù có câu chưa trả lời");
                 localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
-                showModal("Bạn đã trả lời đúng " + score + " câu hỏi!");
+                window.location.href = 'result.html'; // Thay thế hàm showModal
             });
             return;
         }
@@ -136,6 +136,6 @@ function submitQuiz() {
         // Nộp bài
         console.log("Nộp bài");
         localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
-        showModal("Bạn đã trả lời đúng " + score + " câu hỏi!");
+        window.location.href = 'result.html'; // Thay thế hàm showModal
     });
 }
