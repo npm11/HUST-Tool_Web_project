@@ -1,4 +1,4 @@
-var quizzes = {
+var quizzes = JSON.parse(localStorage.getItem('quizzes')) || {
     ktmt: [
         {
             question: "Câu hỏi 1",
@@ -17,6 +17,7 @@ var quizzes = {
         },
     ],
 };
+
 
 var currentQuiz = null;
 
@@ -188,10 +189,12 @@ document.getElementById('new-subject-form').addEventListener('submit', function(
     if (subjectCode && !quizzes[subjectCode]) {
       quizzes[subjectCode] = []; // Thêm môn thi mới với mã môn thi làm khóa và giá trị là một mảng rỗng
       alert('Đã thêm môn thi mới: ' + subjectCode);
+      localStorage.setItem('quizzes', JSON.stringify(quizzes)); // Lưu trữ biến quizzes vào local storage
       updateDropdownMenu(); // Cập nhật dropdown menu
     } else {
       alert('Mã môn thi đã tồn tại hoặc không hợp lệ!');
     }
 });
+
 
   
