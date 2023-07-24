@@ -29,31 +29,30 @@
         var questionTable = document.getElementById("questionTable");
         quizDiv.innerHTML = "";
         questionTable.innerHTML = "";
-        for (var i = 0; i < currentQuiz.length; i++) {
-            var question = currentQuiz[i];
-            var questionDiv = document.createElement("div");
-            questionDiv.textContent = question.question;
-            if (question.type === "multiple_choice") {
-                for (var j = 0; j < question.answers.length; j++) {
-                    var answer = question.answers[j];
-                    var answerInput = document.createElement("input");
-                    answerInput.type = "radio";
-                    answerInput.name = "question" + i;
-                    answerInput.value = j;
-                    var answerLabel = document.createElement("label");
-                    answerLabel.textContent = answer;
-                    questionDiv.appendChild(answerInput);
-                    questionDiv.appendChild(answerLabel);
-                }
-            } else if (question.type === "fill_in") {
+        var question = currentQuiz[currentQuestion];
+        var questionDiv = document.createElement("div");
+        questionDiv.textContent = question.question;
+        if (question.type === "multiple_choice") {
+            for (var j = 0; j < question.answers.length; j++) {
+                var answer = question.answers[j];
                 var answerInput = document.createElement("input");
-                answerInput.type = "text";
-                answerInput.name = "question" + i;
+                answerInput.type = "radio";
+                answerInput.name = "question" + currentQuestion;
+                answerInput.value = j;
+                var answerLabel = document.createElement("label");
+                answerLabel.textContent = answer;
                 questionDiv.appendChild(answerInput);
+                questionDiv.appendChild(answerLabel);
             }
-            quizDiv.appendChild(questionDiv);
+        } else if (question.type === "fill_in") {
+            var answerInput = document.createElement("input");
+            answerInput.type = "text";
+            answerInput.name = "question" + currentQuestion;
+            questionDiv.appendChild(answerInput);
+        }
+        quizDiv.appendChild(questionDiv);
 
-            // Add question button to the question table
+        for (var i = 0; i < currentQuiz.length; i++) {
             var questionButton = document.createElement("button");
             questionButton.textContent = "Câu hỏi " + (i + 1);
             questionButton.onclick = (function(index) {
@@ -65,7 +64,6 @@
             questionTable.appendChild(questionButton);
         }
 
-        // Highlight the current question button
         questionTable.children[currentQuestion].style.backgroundColor = "gray";
     }
 
@@ -149,7 +147,20 @@
             });
         }
     }
-
+    document.getElementById("prevQuestion").addEventListener("click", function() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            displayQuiz();
+        }
+    });
+    
+    document.getElementById("nextQuestion").addEventListener("click", function() {
+        if (currentQuestion < currentQuiz.length - 1) {
+            currentQuestion++;
+            displayQuiz();
+        }
+    });
+    
     var urlParams = new URLSearchParams(window.location.search);
     var quizId = urlParams.get('quiz');
     if (quizId && quizzes[quizId]) {
