@@ -42,8 +42,16 @@
         for (var i = 0; i < currentQuiz.length; i++) {
             var question = currentQuiz[i];
             var questionDiv = document.createElement("div");
-            questionDiv.textContent = (i + 1) + ". " + question.question; // Thêm số thứ tự cho câu hỏi
-            questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi câu hỏi
+            var questionText = document.createElement("p");
+            questionText.textContent = (i + 1) + ". " + question.question.split("\n")[0]; // Thêm số thứ tự cho câu hỏi
+            questionDiv.appendChild(questionText);
+            if (question.question.includes("\n")) {
+                var codeBlock = document.createElement("pre");
+                var code = document.createElement("code");
+                code.textContent = question.question.split("\n").slice(1).join("\n");
+                codeBlock.appendChild(code);
+                questionDiv.appendChild(codeBlock);
+            }
             if (question.type === "multiple_choice") {
                 for (var j = 0; j < question.answers.length; j++) {
                     var answer = question.answers[j];
@@ -62,11 +70,11 @@
                 answerInput.type = "text";
                 answerInput.name = "question" + i;
                 questionDiv.appendChild(answerInput);
-                questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau ô điền đáp án
             }
             quizDiv.appendChild(questionDiv);
         }
     }
+    
     
     
     function showConfirmModal(message, confirmCallback) {
