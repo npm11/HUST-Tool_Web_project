@@ -27,27 +27,24 @@ if (quizId && quizzes[quizId]) {
     displayQuiz();
 }
 
-function showModal(text) {
+function showWarningModal(text, callback) {
     var modal = document.getElementById("myModal");
     var modalContent = document.getElementById("modalContent");
     document.getElementById("modalText").textContent = text;
-    var yesButton = document.createElement("button");
-    yesButton.textContent = "Yes";
-    yesButton.onclick = function() {
+    var continueButton = document.createElement("button");
+    continueButton.textContent = "Vẫn nộp bài";
+    continueButton.onclick = function() {
         modal.style.display = "none";
-        if (text === "Bạn có chắc chắn muốn nộp bài không?") {
-            localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
-            showModal("Bạn đã trả lời đúng " + score + " câu hỏi!");
-        }
+        callback();
     };
-    var noButton = document.createElement("button");
-    noButton.textContent = "No";
-    noButton.onclick = function() {
+    var backButton = document.createElement("button");
+    backButton.textContent = "Quay lại";
+    backButton.onclick = function() {
         modal.style.display = "none";
     };
     modalContent.innerHTML = "";
-    modalContent.appendChild(yesButton);
-    modalContent.appendChild(noButton);
+    modalContent.appendChild(continueButton);
+    modalContent.appendChild(backButton);
     modal.style.display = "block";
     window.onclick = function(event) {
         if (event.target == modal) {
@@ -56,6 +53,31 @@ function showModal(text) {
     }
 }
 
+function showConfirmModal(text, callback) {
+    var modal = document.getElementById("myModal");
+    var modalContent = document.getElementById("modalContent");
+    document.getElementById("modalText").textContent = text;
+    var submitButton = document.createElement("button");
+    submitButton.textContent = "Nộp bài";
+    submitButton.onclick = function() {
+        modal.style.display = "none";
+        callback();
+    };
+    var backButton = document.createElement("button");
+    backButton.textContent = "Quay lại";
+    backButton.onclick = function() {
+        modal.style.display = "none";
+    };
+    modalContent.innerHTML = "";
+    modalContent.appendChild(submitButton);
+    modalContent.appendChild(backButton);
+    modal.style.display = "block";
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
 
 function displayQuiz() {
     var quizDiv = document.getElementById("quiz");
@@ -93,7 +115,11 @@ function submitQuiz() {
             }
         }
         if (answer === null) {
-            showModal("Bạn chưa trả lời tất cả các câu hỏi!");
+            showWarningModal("Còn câu hỏi chưa được trả lời! Bạn có muốn vẫn nộp bài?", function() {
+                // Nộp bài dù có câu chưa trả lời
+                localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
+                showModal("Bạn đã trả lời đúng " + score + " câu hỏi!");
+            });
             return;
         }
         if (answer == question.correctAnswer) {
@@ -105,11 +131,9 @@ function submitQuiz() {
             userAnswer: answer !== null ? question.answers[answer] : null
         });
     }
-    showModal("Bạn có chắc chắn muốn nộp bài không?");
-    var modal = document.getElementById("myModal");
-    modal.onclick = function() {
-        modal.style.display = "none";
+    showConfirmModal("Bạn đã hoàn thành tất cả câu hỏi. Bạn có chắc chắn muốn nộp bài?", function() {
+        // Nộp bài
         localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
         showModal("Bạn đã trả lời đúng " + score + " câu hỏi!");
-    }
+    });
 }
