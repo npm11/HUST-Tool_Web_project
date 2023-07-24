@@ -13,19 +13,23 @@ window.onload = function() {
     for (var i = 0; i < result.length; i++) {
         var resultText = document.createElement("p");
         var correctAnswer = result[i].correctAnswer;
-        if (typeof correctAnswer === 'number') {
+        if (Array.isArray(correctAnswer)) {
+            correctAnswer = correctAnswer.map(index => String.fromCharCode(65 + index)).join(", ");
+        } else if (typeof correctAnswer === 'number') {
             correctAnswer = String.fromCharCode(65 + correctAnswer);
         } else if (correctAnswer === "Đáp án") {
             correctAnswer = "KTMT";
         }
         var userAnswer = result[i].userAnswer;
+        if (Array.isArray(userAnswer)) {
+            userAnswer = userAnswer.map(index => String.fromCharCode(65 + index)).join(", ");
+        } else if (typeof userAnswer === 'number') {
+            userAnswer = String.fromCharCode(65 + userAnswer);
+        }
         if (userAnswer !== null && userAnswer !== "") {
-            if (typeof userAnswer === 'number') {
-                userAnswer = String.fromCharCode(65 + userAnswer);
-            }
             resultText.textContent = "Câu hỏi " + (i + 1) + ": Đáp án đúng là " + correctAnswer + ", bạn đã chọn " + userAnswer + ".";
         } else {
-            resultText.textContent = "Câu hỏi " + (i + 1) + ": Đáp án đúng là " + correctAnswer + ", bạn không điền đáp án.";
+            resultText.textContent = "Câu hỏi " + (i + 1) + ": Đáp án đúng là " + correctAnswer + ", bạn không trả lời câu hỏi.";
         }
         resultDiv.appendChild(resultText);
     }
