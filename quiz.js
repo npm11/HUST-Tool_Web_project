@@ -6,13 +6,13 @@
                 type: "multiple_choice",
                 question: "Thanh ghi nào có giá trị cố định, không thay đổi trong khi chạy chương trình?",
                 answers: ["$at", "$zero", "$sp", "hi", "pc"],
-                correctAnswer: 1
+                correctAnswer: 2
             },
             {
                 type: "multiple_choice_multiple_answers",
                 question: "Trong ứng dụng Mars, khi dịch từ mã nguồn sang mã cơ bản, những công việc nào sau đây sẽ được thực hiện? (có thể chọn nhiều đáp án)",
                 answers: ["Chuyển các nhãn thành địa chỉ", "Chuyển các thanh ghi từ tên sang số hiệu", "Chuyển các hằng số từ hệ thập phân sang hệ thập lục phân", "Thay thế giả lệnh bằng các lệnh cơ bản"],
-                correctAnswer: [0, 1, 2, 3] // Giả sử tất cả các đáp án đều đúng
+                correctAnswer: [1, 2, 4] // Giả sử tất cả các đáp án đều đúng
             },
             {
                 type: "fill_in",
