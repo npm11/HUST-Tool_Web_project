@@ -17,12 +17,12 @@
             {
                 type: "fill_in",
                 question: "Giá trí của thanh ghi $a0 sau khi đoạn chương trình dưới được thực hiện là bao nhiêu? (điền số ở hệ thập phân).\n.text\n\tli $a0, 0\n\tli $a1, 0\n\tli $a2, 5\nl1:\n\tbeq $a1, $a2, end\n\tadd $at, $a1, $s1\n\tadd $a0, $a0, $at\n\taddi $ai, $ai, 1\n\tj l1\nend:",
-                correctAnswer: "Đáp án" // Thay "Đáp án" bằng đáp án thực tế của bạn
+                correctAnswer: "thật à" // Thay "Đáp án" bằng đáp án thực tế của bạn
             },
             {
                 type: "fill_in",
                 question: "Đoạn chương trình sau in chuỗi ký tự gì ra màn hình Run I/O?\n.text\n\tli $a1, 0\n\tli $a2, 5\n\tli $v0, 11\nl1:\n\tbeq $a1, $a2, end\n\taddi $a0, $a1, 49\n\tsyscall \n\taddi $a1, $a1, 1\n\tj li\nend:",
-                correctAnswer: "Đáp án" // Thay "Đáp án" bằng đáp án thực tế của bạn
+                correctAnswer: "địt cụ" // Thay "Đáp án" bằng đáp án thực tế của bạn
             },
             {
                 type: "fill_in",

@@ -16,7 +16,8 @@ window.onload = function() {
         if (typeof correctAnswer === 'number') {
             correctAnswer = String.fromCharCode(65 + correctAnswer);
         } else if (correctAnswer === "Đáp án") {
-
+            correctAnswer = "KTMT";
+        }
         var userAnswer = result[i].userAnswer;
         if (userAnswer !== null && userAnswer !== "") {
             if (typeof userAnswer === 'number') {
