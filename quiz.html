@@ -8,7 +8,11 @@
 <body>
     <nav>
         <a href="index.html">Trang chủ</a> |
-        <a href="quiz.html">Thi thử</a>
+        <select id="quizSelect" onchange="loadQuiz()">
+            <option value="">Chọn môn thi</option>
+            <option value="ktmt">Thực hành KTMT</option>
+            <!-- Thêm môn thi tại đây -->
+        </select>
     </nav>
     <h1>Thi thử</h1>
     <div id="quiz"></div>

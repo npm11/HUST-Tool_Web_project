@@ -1,21 +1,34 @@
-var questions = [
-    {
-        question: "Câu hỏi 1",
-        answers: ["A", "B", "C", "D"],
-        correctAnswer: 0
-    },
-    {
-        question: "Câu hỏi 2",
-        answers: ["A", "B", "C", "D"],
-        correctAnswer: 1
-    },
-    // Thêm câu hỏi tại đây
-];
+var quizzes = {
+    ktmt: [
+        {
+            question: "Câu hỏi 1",
+            answers: ["A", "B", "C", "D"],
+            correctAnswer: 0
+        },
+        {
+            question: "Câu hỏi 2",
+            answers: ["A", "B", "C", "D"],
+            correctAnswer: 1
+        },
+        // Thêm câu hỏi tại đây
+    ],
+    // Thêm bộ đề thi tại đây
+};
+
+var currentQuiz = null;
+
+function loadQuiz() {
+    var quizSelect = document.getElementById("quizSelect");
+    var quizId = quizSelect.value;
+    currentQuiz = quizzes[quizId];
+    displayQuiz();
+}
 
 function displayQuiz() {
     var quizDiv = document.getElementById("quiz");
-    for (var i = 0; i < questions.length; i++) {
-        var question = questions[i];
+    quizDiv.innerHTML = "";
+    for (var i = 0; i < currentQuiz.length; i++) {
+        var question = currentQuiz[i];
         var questionDiv = document.createElement("div");
         questionDiv.textContent = question.question;
         for (var j = 0; j < question.answers.length; j++) {
@@ -35,14 +48,26 @@ function displayQuiz() {
 
 function submitQuiz() {
     var score = 0;
-    for (var i = 0; i < questions.length; i++) {
-        var question = questions[i];
-        var answer = document.querySelector('input[name="question' + i + '"]:checked').value;
+    for (var i = 0; i < currentQuiz.length; i++) {
+        var question = currentQuiz[i];
+        var answerInputs = document.getElementsByName("question" + i);
+        var answer = null;
+        for (var j = 0; j < answerInputs.length; j++) {
+            if (answerInputs[j].checked) {
+                answer = answerInputs[j].value;
+                break;
+            }
+        }
+        if (answer === null) {
+            alert("Bạn chưa trả lời tất cả các câu hỏi!");
+            return;
+        }
         if (answer == question.correctAnswer) {
             score++;
         }
     }
+    if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
+        return;
+    }
     alert("Bạn đã trả lời đúng " + score + " câu hỏi!");
 }
-
-displayQuiz();
