@@ -10,6 +10,11 @@ var quizzes = {
             answers: ["A", "B", "C", "D"],
             correctAnswer: 1
         },
+        {
+            question: "Câu hỏi 3",
+            answers: ["A", "B", "C", "D"],
+            correctAnswer: 2
+        },
         // Thêm câu hỏi tại đây
     ],
     // Thêm bộ đề thi tại đây
