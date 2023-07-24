@@ -26,8 +26,8 @@
         </div>
     </nav>
     <h1>Quiz</h1>
-    <div id="quiz"></div>
-    <button onclick="submitQuiz()">Submit Quiz</button>
+    <form id="quiz" onsubmit="event.preventDefault(); submitQuiz();"></form>
+    <button type="submit" form="quiz">Submit Quiz</button>
     <script src="quiz.js"></script>
 </body>
 </html>
