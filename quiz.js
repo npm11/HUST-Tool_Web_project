@@ -52,6 +52,7 @@ function displayQuiz() {
 }
 
 function submitQuiz() {
+    console.log("submitQuiz() has been called.");
     var score = 0;
     var result = [];
     for (var i = 0; i < currentQuiz.length; i++) {
