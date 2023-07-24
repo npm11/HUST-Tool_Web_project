@@ -9,7 +9,7 @@
                 correctAnswer: 1
             },
             {
-                type: "multiple_choice",
+                type: "multiple_choice_multiple_answers",
                 question: "Trong ứng dụng Mars, khi dịch từ mã nguồn sang mã cơ bản, những công việc nào sau đây sẽ được thực hiện? (có thể chọn nhiều đáp án)",
                 answers: ["Chuyển các nhãn thành địa chỉ", "Chuyển các thanh ghi từ tên sang số hiệu", "Chuyển các hằng số từ hệ thập phân sang hệ thập lục phân", "Thay thế giả lệnh bằng các lệnh cơ bản"],
                 correctAnswer: [0, 1, 2, 3] // Giả sử tất cả các đáp án đều đúng
@@ -59,6 +59,19 @@
                     var answer = question.answers[j];
                     var answerInput = document.createElement("input");
                     answerInput.type = "radio";
+                    answerInput.name = "question" + i;
+                    answerInput.value = j;
+                    var answerLabel = document.createElement("label");
+                    answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer; // Thêm số thứ tự cho đáp án
+                    questionDiv.appendChild(answerInput);
+                    questionDiv.appendChild(answerLabel);
+                    questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
+                }
+            } else if (question.type === "multiple_choice_multiple_answers") {
+                for (var j = 0; j < question.answers.length; j++) {
+                    var answer = question.answers[j];
+                    var answerInput = document.createElement("input");
+                    answerInput.type = "checkbox";
                     answerInput.name = "question" + i;
                     answerInput.value = j;
                     var answerLabel = document.createElement("label");
@@ -125,14 +138,25 @@
                         break;
                     }
                 }
+            } else if (question.type === "multiple_choice_multiple_answers") {
+                answer = [];
+                for (var j = 0; j < answerInputs.length; j++) {
+                    if (answerInputs[j].checked) {
+                        answer.push(j);
+                    }
+                }
             } else if (question.type === "fill_in") {
                 answer = answerInputs[0].value;
             }
-            if (answer === null || answer === "") {
+            if (answer === null || answer === "" || (Array.isArray(answer) && answer.length === 0)) {
                 unanswered = true;
                 console.log("Câu hỏi " + (i + 1) + " chưa được trả lời.");
             }
-            if (answer == question.correctAnswer) {
+            if (Array.isArray(answer) && Array.isArray(question.correctAnswer)) {
+                if (answer.length === question.correctAnswer.length && answer.every((v, k) => question.correctAnswer.includes(v))) {
+                    score++;
+                }
+            } else if (answer == question.correctAnswer) {
                 score++;
             }
             result.push({
