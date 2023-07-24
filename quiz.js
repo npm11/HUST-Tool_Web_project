@@ -42,8 +42,10 @@
         for (var i = 0; i < currentQuiz.length; i++) {
             var question = currentQuiz[i];
             var questionDiv = document.createElement("div");
+            questionDiv.style.marginBottom = "20px"; // Tạo khoảng cách giữa các cụm câu hỏi-đáp án
             var questionText = document.createElement("p");
             questionText.textContent = (i + 1) + ". " + question.question.split("\n")[0]; // Thêm số thứ tự cho câu hỏi
+            questionText.style.fontWeight = "bold"; // Làm cho câu hỏi in đậm
             questionDiv.appendChild(questionText);
             if (question.question.includes("\n")) {
                 var codeBlock = document.createElement("pre");
@@ -74,9 +76,7 @@
             quizDiv.appendChild(questionDiv);
         }
     }
-    
-    
-    
+
     function showConfirmModal(message, confirmCallback) {
         var modal = document.getElementById("confirmModal");
         var span = document.getElementsByClassName("close")[0];
