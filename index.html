@@ -38,5 +38,24 @@
     <h1>Welcome to the Quiz App</h1>
     <p>Đây là ứng dụng thi trắc nghiệm trực tuyến. Bạn có thể chọn môn học từ menu "Thi thử" để bắt đầu.</p>
     <script src="quiz.js"></script>
+    <h2>Thêm môn thi mới</h2>
+    <form id="new-subject-form">
+      <label for="subject-code">Mã môn thi:</label><br>
+      <input type="text" id="subject-code" name="subject-code"><br>
+      <input type="submit" value="Thêm môn thi">
+    </form>
+    <h2>Thêm bộ đề thi mới</h2>
+    <form id="new-quiz-form">
+      <label for="quiz-subject-code">Mã môn thi:</label><br>
+      <input type="text" id="quiz-subject-code" name="quiz-subject-code"><br>
+      <label for="quiz-question">Câu hỏi:</label><br>
+      <input type="text" id="quiz-question" name="quiz-question"><br>
+      <label for="quiz-answers">Các lựa chọn trả lời (phân tách bằng dấu phẩy):</label><br>
+      <input type="text" id="quiz-answers" name="quiz-answers"><br>
+      <label for="quiz-correct-answer">Chỉ số của câu trả lời đúng:</label><br>
+      <input type="number" id="quiz-correct-answer" name="quiz-correct-answer"><br>
+      <input type="submit" value="Thêm bộ đề thi">
+    </form>
+       
 </body>
 </html>

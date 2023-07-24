@@ -144,5 +144,32 @@ function submitQuiz() {
         });
     }
 }
-
+document.getElementById('new-subject-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+    var subjectCode = document.getElementById('subject-code').value;
+    if (subjectCode && !quizzes[subjectCode]) {
+      quizzes[subjectCode] = []; // Thêm môn thi mới với mã môn thi làm khóa và giá trị là một mảng rỗng
+      alert('Đã thêm môn thi mới: ' + subjectCode);
+    } else {
+      alert('Mã môn thi đã tồn tại hoặc không hợp lệ!');
+    }
+  });
+document.getElementById('new-quiz-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+    var subjectCode = document.getElementById('quiz-subject-code').value;
+    var question = document.getElementById('quiz-question').value;
+    var answers = document.getElementById('quiz-answers').value.split(',');
+    var correctAnswer = parseInt(document.getElementById('quiz-correct-answer').value);
+    if (subjectCode && quizzes[subjectCode] && question && answers.length && correctAnswer >= 0 && correctAnswer < answers.length) {
+      quizzes[subjectCode].push({
+        question: question,
+        answers: answers,
+        correctAnswer: correctAnswer
+      }); // Thêm bộ đề thi mới vào môn thi tương ứng
+      alert('Đã thêm bộ đề thi mới vào môn ' + subjectCode);
+    } else {
+      alert('Thông tin bộ đề thi không hợp lệ hoặc mã môn thi không tồn tại!');
+    }
+  });
+  
 
