@@ -27,7 +27,7 @@ window.onload = function() {
             userAnswer = String.fromCharCode(65 + userAnswer);
         }
         if (userAnswer !== null && userAnswer !== "") {
-            resultText.textContent = "Câu hỏi " + (i + 1) + ": Đáp án đúng là " + correctAnswer + ", bạn đã chọn " + userAnswer + ".";
+            resultText.textContent = "Câu hỏi " + (i + 1) + ": Đáp án đúng là " + correctAnswer + ", bạn đã trả lời là " + userAnswer + ".";
         } else {
             resultText.textContent = "Câu hỏi " + (i + 1) + ": Đáp án đúng là " + correctAnswer + ", bạn không trả lời câu hỏi.";
         }
