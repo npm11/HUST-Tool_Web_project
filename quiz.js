@@ -29,18 +29,33 @@ if (quizId && quizzes[quizId]) {
 
 function showModal(text) {
     var modal = document.getElementById("myModal");
-    var span = document.getElementsByClassName("close")[0];
+    var modalContent = document.getElementById("modalContent");
     document.getElementById("modalText").textContent = text;
-    modal.style.display = "block";
-    span.onclick = function() {
+    var yesButton = document.createElement("button");
+    yesButton.textContent = "Yes";
+    yesButton.onclick = function() {
         modal.style.display = "none";
-    }
+        if (text === "Bạn có chắc chắn muốn nộp bài không?") {
+            localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
+            showModal("Bạn đã trả lời đúng " + score + " câu hỏi!");
+        }
+    };
+    var noButton = document.createElement("button");
+    noButton.textContent = "No";
+    noButton.onclick = function() {
+        modal.style.display = "none";
+    };
+    modalContent.innerHTML = "";
+    modalContent.appendChild(yesButton);
+    modalContent.appendChild(noButton);
+    modal.style.display = "block";
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     }
 }
+
 
 function displayQuiz() {
     var quizDiv = document.getElementById("quiz");
