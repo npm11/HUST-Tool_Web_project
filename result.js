@@ -1,5 +1,5 @@
 window.onload = function() {
-    var result = JSON.parse(localStorage.getItem('result'));
+    var result = JSON.parse(localStorage.getItem('myUniqueKey'));
     var resultDiv = document.getElementById("result");
     for (var i = 0; i < result.length; i++) {
         var resultText = document.createElement("p");

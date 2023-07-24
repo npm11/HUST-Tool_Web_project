@@ -1,3 +1,9 @@
+if (typeof(Storage) !== "undefined") {
+    // Code for localStorage/sessionStorage.
+} else {
+    alert("Trình duyệt của bạn không hỗ trợ lưu trữ cục bộ. Vui lòng cập nhật trình duyệt của bạn để sử dụng tính năng này.");
+}
+
 var questions = [
     {
         question: "Câu hỏi 1",
@@ -103,7 +109,7 @@ function confirmSubmit() {
             });
         }
     }
-    localStorage.setItem('result', JSON.stringify(result));
+    localStorage.setItem('myUniqueKey', JSON.stringify(result));
     window.location.href = 'result.html';
 }
 
