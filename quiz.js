@@ -42,7 +42,7 @@
         for (var i = 0; i < currentQuiz.length; i++) {
             var question = currentQuiz[i];
             var questionDiv = document.createElement("div");
-            questionDiv.textContent = question.question;
+            questionDiv.textContent = (i + 1) + ". " + question.question; // Thêm số thứ tự cho câu hỏi
             if (question.type === "multiple_choice") {
                 for (var j = 0; j < question.answers.length; j++) {
                     var answer = question.answers[j];
@@ -51,9 +51,10 @@
                     answerInput.name = "question" + i;
                     answerInput.value = j;
                     var answerLabel = document.createElement("label");
-                    answerLabel.textContent = answer;
+                    answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer; // Thêm số thứ tự cho đáp án
                     questionDiv.appendChild(answerInput);
                     questionDiv.appendChild(answerLabel);
+                    questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
                 }
             } else if (question.type === "fill_in") {
                 var answerInput = document.createElement("input");
@@ -64,6 +65,7 @@
             quizDiv.appendChild(questionDiv);
         }
     }
+    
     function showConfirmModal(message, confirmCallback) {
         var modal = document.getElementById("confirmModal");
         var span = document.getElementsByClassName("close")[0];
