@@ -22,10 +22,13 @@
     };
 
     var currentQuiz = null;
+    var currentQuestion = 0;
 
     function displayQuiz() {
         var quizDiv = document.getElementById("quiz");
+        var questionTable = document.getElementById("questionTable");
         quizDiv.innerHTML = "";
+        questionTable.innerHTML = "";
         for (var i = 0; i < currentQuiz.length; i++) {
             var question = currentQuiz[i];
             var questionDiv = document.createElement("div");
@@ -49,8 +52,23 @@
                 questionDiv.appendChild(answerInput);
             }
             quizDiv.appendChild(questionDiv);
+
+            // Add question button to the question table
+            var questionButton = document.createElement("button");
+            questionButton.textContent = "Câu hỏi " + (i + 1);
+            questionButton.onclick = (function(index) {
+                return function() {
+                    currentQuestion = index;
+                    displayQuiz();
+                };
+            })(i);
+            questionTable.appendChild(questionButton);
         }
+
+        // Highlight the current question button
+        questionTable.children[currentQuestion].style.backgroundColor = "gray";
     }
+
     function showConfirmModal(message, confirmCallback) {
         var modal = document.getElementById("confirmModal");
         var span = document.getElementsByClassName("close")[0];
@@ -66,7 +84,7 @@
             modal.style.display = "none";
         }
     }
-    
+
     function showWarningModal(message, confirmCallback) {
         var modal = document.getElementById("warningModal");
         var span = document.getElementsByClassName("close")[1];
@@ -82,8 +100,7 @@
             modal.style.display = "none";
         }
     }
-    
-    
+
     function submitQuiz() {
         var score = 0;
         var result = [];
@@ -115,7 +132,7 @@
                 userAnswer: answer !== null ? answer : null
             });
         }
-    
+
         if (unanswered) {
             showWarningModal("Còn câu hỏi chưa được trả lời! Bạn có muốn vẫn nộp bài?", function() {
                 // Nộp bài dù có câu chưa trả lời
@@ -132,7 +149,6 @@
             });
         }
     }
-    
 
     var urlParams = new URLSearchParams(window.location.search);
     var quizId = urlParams.get('quiz');
@@ -145,15 +161,3 @@
     window.displayQuiz = displayQuiz;
     window.submitQuiz = submitQuiz;
 })();
-
-
-
-
-
-
-
-
-
-
-
-
