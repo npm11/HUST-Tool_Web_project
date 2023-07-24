@@ -171,8 +171,17 @@
         } else {
             alert("Quiz không tồn tại.");
         }
-        document.getElementById("submitQuiz").onclick = submitQuiz;
-        document.getElementById("nextQuestion").onclick = nextQuestion;
-        document.getElementById("previousQuestion").onclick = previousQuestion;
+        var submitQuizButton = document.getElementById("submitQuiz");
+        var nextQuestionButton = document.getElementById("nextQuestion");
+        var previousQuestionButton = document.getElementById("previousQuestion");
+        if(submitQuizButton) {
+            submitQuizButton.onclick = submitQuiz;
+        }
+        if(nextQuestionButton) {
+            nextQuestionButton.onclick = nextQuestion;
+        }
+        if(previousQuestionButton) {
+            previousQuestionButton.onclick = previousQuestion;
+        }
     };
 })();
