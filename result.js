@@ -1,5 +1,9 @@
 window.onload = function() {
     var data = JSON.parse(localStorage.getItem('myUniqueKey'));
+    if (data === null) {
+        document.getElementById("result").textContent = "Bạn chưa tham gia thi.";
+        return;
+    }
     var result = data.result;
     var score = data.score;
     var resultDiv = document.getElementById("result");
@@ -15,4 +19,5 @@ window.onload = function() {
         }
         resultDiv.appendChild(resultText);
     }
+    localStorage.removeItem('myUniqueKey'); // Xóa dữ liệu từ localStorage
 };
