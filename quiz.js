@@ -65,11 +65,15 @@ function submitQuiz() {
             }
         }
         if (answer === null) {
+            console.error("Câu " + (i + 1) + ": Bạn chưa trả lời.");
             alert("Bạn chưa trả lời tất cả các câu hỏi!");
             return;
         }
         if (answer == question.correctAnswer) {
             score++;
+            console.log("Câu " + (i + 1) + ": Bạn đã trả lời đúng.");
+        } else {
+            console.log("Câu " + (i + 1) + ": Bạn đã trả lời sai.");
         }
         result.push({
             correctAnswer: question.answers[question.correctAnswer],
@@ -80,8 +84,10 @@ function submitQuiz() {
         return;
     }
     localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
+    console.log("Bạn đã trả lời đúng " + score + " câu hỏi!");
     alert("Bạn đã trả lời đúng " + score + " câu hỏi!");
 }
+
 
 
 
