@@ -60,7 +60,7 @@ function submitQuiz() {
         var answer = null;
         for (var j = 0; j < answerInputs.length; j++) {
             if (answerInputs[j].checked) {
-                answer = answerInputs[j].value;
+                answer = parseInt(answerInputs[j].value, 10);
                 break;
             }
         }
@@ -68,7 +68,7 @@ function submitQuiz() {
             alert("Bạn chưa trả lời tất cả các câu hỏi!");
             return;
         }
-        if (answer == question.answers[question.correctAnswer]) {
+        if (answer == question.correctAnswer) {
             score++;
         }
         result.push({
@@ -82,4 +82,6 @@ function submitQuiz() {
     localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
     alert("Bạn đã trả lời đúng " + score + " câu hỏi!");
 }
+
+
 
