@@ -82,6 +82,8 @@ function submitQuiz() {
             return;
         }
     }
+    var resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = "";
     for (var i = 0; i < questions.length; i++) {
         var question = questions[i];
         var answer = question.userAnswer;
@@ -91,12 +93,25 @@ function submitQuiz() {
         }
         if (answer == question.correctAnswer) {
             score++;
+        } else {
+            var resultText = document.createElement("p");
+            resultText.textContent = "Câu " + (i + 1) + ": Đáp án đúng là " + question.answers[question.correctAnswer] + ", bạn đã chọn " + question.answers[answer];
+            resultDiv.appendChild(resultText);
         }
     }
     if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
         return;
     }
     alert("Bạn đã trả lời đúng " + score + " câu hỏi!");
+    openPopup();
+}
+
+function openPopup() {
+    document.getElementById("resultPopup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("resultPopup").style.display = "none";
 }
 
 displayQuestionList();
