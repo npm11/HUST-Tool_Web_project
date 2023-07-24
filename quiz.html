@@ -26,24 +26,22 @@
             <button id="warningModalNo" class="btn btn-secondary">No</button>
         </div>
     </div>    
-    <div id="questionList"></div>
-    <div id="currentQuestion"></div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button onclick="location.href='index.html'" class="btn btn-primary">Trang chủ</button>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Thi thử
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="quiz.html?quiz=ktmt">KTMT</a>
-                <!-- Add more quizzes here -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div id="questionList" class="mb-3">
+                    <ul class="list-group">
+                        <!-- Danh sách câu hỏi sẽ được tạo tự động bởi script -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1 class="text-center">Quiz</h1>
+                <div id="currentQuestion"></div>
+                <form id="quiz" onsubmit="event.preventDefault(); submitQuiz();"></form>
+                <button type="submit" form="quiz" class="btn btn-primary mt-3">Submit Quiz</button>
             </div>
         </div>
-    </nav>
-    <h1 class="text-center">Quiz</h1>
-    <div class="container">
-        <form id="quiz" onsubmit="event.preventDefault(); submitQuiz();"></form>
-        <button type="submit" form="quiz" class="btn btn-primary mt-3">Submit Quiz</button>
     </div>
     <script src="quiz.js"></script>
 </body>
