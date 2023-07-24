@@ -58,9 +58,6 @@
         var noButton = document.getElementById("confirmModalNo");
         document.getElementById("confirmModalText").innerText = message;
         modal.style.display = "block";
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
         yesButton.onclick = function() {
             confirmCallback();
             modal.style.display = "none";
@@ -77,9 +74,6 @@
         var noButton = document.getElementById("warningModalNo");
         document.getElementById("warningModalText").innerText = message;
         modal.style.display = "block";
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
         yesButton.onclick = function() {
             confirmCallback();
             modal.style.display = "none";
@@ -88,6 +82,7 @@
             modal.style.display = "none";
         }
     }
+    
     
     function submitQuiz() {
         var score = 0;
