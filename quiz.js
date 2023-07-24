@@ -18,6 +18,8 @@ var quizzes = JSON.parse(localStorage.getItem('quizzes')) || {
     ],
 };
 
+updateDropdownMenu(); // Cập nhật dropdown menu ngay khi trang được tải
+
 
 var currentQuiz = null;
 
@@ -195,6 +197,3 @@ document.getElementById('new-subject-form').addEventListener('submit', function(
       alert('Mã môn thi đã tồn tại hoặc không hợp lệ!');
     }
 });
-
-
-  
