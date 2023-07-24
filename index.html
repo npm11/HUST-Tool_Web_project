@@ -1,89 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HUST Exam</title>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <title>Quiz App</title>
+    <meta http-equiv='cache-control' content='no-cache'> 
+    <meta http-equiv='expires' content='0'> 
+    <meta http-equiv='pragma' content='no-cache'>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <h1>Trang chính</h1>
-    <div class="dropdown">
-        <button class="dropbtn">Thi thử</button>
-        <div class="dropdown-content" id="quiz-dropdown">
-            <!-- Các môn thi sẽ được thêm vào đây bằng JavaScript -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalText"></p>
+            <div id="modalContent"></div>
+        </div>
+    </div>    
+</div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalText"></p>
+            <div id="modalContent"></div>
         </div>
     </div>
-
-    <h2>Thêm môn thi mới 2</h2>
-    <form id="new-subject-form">
-        <label for="subject-code">Mã môn thi:</label><br>
-        <input type="text" id="subject-code" name="subject-code"><br>
-        <input type="submit" value="Thêm môn thi">
-    </form>
-
-    <script>
-        // Cấu hình Firebase
-        var firebaseConfig = 
-// Import the functions you need from the SDKs you need
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-{
-  apiKey: "AIzaSyAOCLnxGQ5OO3ohswT-bi36zvetOgjgjO0",
-  authDomain: "hustexam-2f4b6.firebaseapp.com",
-  projectId: "hustexam-2f4b6",
-  storageBucket: "hustexam-2f4b6.appspot.com",
-  messagingSenderId: "3756884848",
-  appId: "1:3756884848:web:53ed1cbc05d0455d2e45b5",
-  measurementId: "G-892YE0N3P3"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-        // Khởi tạo Firebase
-        var database = firebase.database();
-
-        document.getElementById('new-subject-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Ngăn chặn hành vi mặc định của form
-            var subjectCode = document.getElementById('subject-code').value;
-            if (subjectCode) {
-                var subjectRef = database.ref('quizzes/' + subjectCode);
-                subjectRef.once('value', function(snapshot) {
-                    if (snapshot.exists()) {
-                        alert('Mã môn thi đã tồn tại!');
-                    } else {
-                        subjectRef.set([]); // Thêm môn thi mới với mã môn thi làm khóa và giá trị là một mảng rỗng
-                        alert('Đã thêm môn thi mới: ' + subjectCode);
-                        updateDropdownMenu();
-                    }
-                });
-            } else {
-                alert('Mã môn thi không hợp lệ!');
-            }
-        });
-
-        function updateDropdownMenu() {
-            var dropdownContent = document.getElementById('quiz-dropdown');
-            dropdownContent.innerHTML = ''; // Xóa tất cả các mục hiện tại
-            var quizzesRef = database.ref('quizzes');
-            quizzesRef.once('value', function(snapshot) {
-                snapshot.forEach(function(childSnapshot) {
-                    var subjectCode = childSnapshot.key;
-                    var a = document.createElement('a');
-                    a.href = "quiz.html?quiz=" + subjectCode;
-                    a.textContent = subjectCode;
-                    dropdownContent.appendChild(a); // Thêm một mục mới cho mỗi môn thi
-                });
-            });
-        }
-
-        // Cập nhật dropdown menu ngay khi trang được tải
-        updateDropdownMenu();
-    </script>
+      
+    <nav>
+        <button onclick="location.href='index.html'">Trang chủ</button>
+        <div class="dropdown">
+            <button class="dropbtn">Thi thử</button>
+            <div class="dropdown-content">
+                <a href="quiz.html?quiz=ktmt">KTMT</a>
+                <!-- Add more quizzes here -->
+            </div>
+        </div>
+    </nav>
+    <h1>Welcome to the Quiz App</h1>
+    <p>Đây là ứng dụng thi trắc nghiệm trực tuyến. Bạn có thể chọn môn học từ menu "Thi thử" để bắt đầu.</p>
+    <script src="quiz.js"></script>
 </body>
 </html>

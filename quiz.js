@@ -1,4 +1,4 @@
-var quizzes = JSON.parse(localStorage.getItem('quizzes')) || {
+var quizzes = {
     ktmt: [
         {
             question: "Câu hỏi 1",
@@ -17,9 +17,6 @@ var quizzes = JSON.parse(localStorage.getItem('quizzes')) || {
         },
     ],
 };
-
-updateDropdownMenu(); // Cập nhật dropdown menu ngay khi trang được tải
-
 
 var currentQuiz = null;
 
@@ -147,63 +144,5 @@ function submitQuiz() {
         });
     }
 }
-var database = firebase.database();
 
-document.getElementById('new-subject-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Ngăn chặn hành vi mặc định của form
-  var subjectCode = document.getElementById('subject-code').value;
-  if (subjectCode) {
-    var subjectRef = database.ref('quizzes/' + subjectCode);
-    subjectRef.once('value', function(snapshot) {
-      if (snapshot.exists()) {
-        alert('Mã môn thi đã tồn tại!');
-      } else {
-        subjectRef.set([]); // Thêm môn thi mới với mã môn thi làm khóa và giá trị là một mảng rỗng
-        alert('Đã thêm môn thi mới: ' + subjectCode);
-      }
-    });
-  } else {
-    alert('Mã môn thi không hợp lệ!');
-  }
-});
 
-document.getElementById('new-quiz-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Ngăn chặn hành vi mặc định của form
-    var subjectCode = document.getElementById('quiz-subject-code').value;
-    var question = document.getElementById('quiz-question').value;
-    var answers = document.getElementById('quiz-answers').value.split(',');
-    var correctAnswer = parseInt(document.getElementById('quiz-correct-answer').value);
-    if (subjectCode && quizzes[subjectCode] && question && answers.length && correctAnswer >= 0 && correctAnswer < answers.length) {
-      quizzes[subjectCode].push({
-        question: question,
-        answers: answers,
-        correctAnswer: correctAnswer
-      }); // Thêm bộ đề thi mới vào môn thi tương ứng
-      alert('Đã thêm bộ đề thi mới vào môn ' + subjectCode);
-    } else {
-      alert('Thông tin bộ đề thi không hợp lệ hoặc mã môn thi không tồn tại!');
-    }
-  });
-  
-function updateDropdownMenu() {
-  var dropdownContent = document.querySelector('.dropdown-content');
-  dropdownContent.innerHTML = ''; // Xóa tất cả các mục hiện tại
-  for (var subjectCode in quizzes) {
-    var a = document.createElement('a');
-    a.href = "quiz.html?quiz=" + subjectCode;
-    a.textContent = subjectCode;
-    dropdownContent.appendChild(a); // Thêm một mục mới cho mỗi môn thi
-  }
-}
-document.getElementById('new-subject-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Ngăn chặn hành vi mặc định của form
-    var subjectCode = document.getElementById('subject-code').value;
-    if (subjectCode && !quizzes[subjectCode]) {
-      quizzes[subjectCode] = []; // Thêm môn thi mới với mã môn thi làm khóa và giá trị là một mảng rỗng
-      alert('Đã thêm môn thi mới: ' + subjectCode);
-      localStorage.setItem('quizzes', JSON.stringify(quizzes)); // Lưu trữ biến quizzes vào local storage
-      updateDropdownMenu(); // Cập nhật dropdown menu
-    } else {
-      alert('Mã môn thi đã tồn tại hoặc không hợp lệ!');
-    }
-});
