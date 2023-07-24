@@ -32,6 +32,8 @@
         var question = currentQuiz[currentQuestion];
         var questionDiv = document.createElement("div");
         questionDiv.textContent = question.question;
+        quizDiv.appendChild(questionDiv); // Add the questionDiv to the quizDiv immediately after creating it
+
         if (question.type === "multiple_choice") {
             for (var j = 0; j < question.answers.length; j++) {
                 var answer = question.answers[j];
@@ -50,7 +52,6 @@
             answerInput.name = "question" + currentQuestion;
             questionDiv.appendChild(answerInput);
         }
-        quizDiv.appendChild(questionDiv);
 
         for (var i = 0; i < currentQuiz.length; i++) {
             var questionButton = document.createElement("button");
@@ -61,10 +62,12 @@
                     displayQuiz();
                 };
             })(i);
-            questionTable.appendChild(questionButton);
+            questionTable.appendChild(questionButton); // Add the questionButton to the questionTable immediately after creating it
         }
 
-        questionTable.children[currentQuestion].style.backgroundColor = "gray";
+        if (currentQuestion < questionTable.children.length) {
+            questionTable.children[currentQuestion].style.backgroundColor = "gray";
+        }
     }
 
     function showConfirmModal(message, confirmCallback) {
