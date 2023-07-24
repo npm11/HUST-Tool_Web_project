@@ -32,7 +32,7 @@
         var question = currentQuiz[currentQuestion];
         var questionDiv = document.createElement("div");
         questionDiv.textContent = question.question;
-        quizDiv.appendChild(questionDiv); // Add the questionDiv to the quizDiv immediately after creating it
+        quizDiv.appendChild(questionDiv);
 
         if (question.type === "multiple_choice") {
             for (var j = 0; j < question.answers.length; j++) {
@@ -62,7 +62,7 @@
                     displayQuiz();
                 };
             })(i);
-            questionTable.appendChild(questionButton); // Add the questionButton to the questionTable immediately after creating it
+            questionTable.appendChild(questionButton);
         }
 
         if (currentQuestion < questionTable.children.length) {
@@ -135,43 +135,44 @@
         }
 
         if (unanswered) {
-            showWarningModal("Còn câu hỏi chưa được trả lời! Bạn có muốn vẫn nộp bài?", function() {
-                // Nộp bài dù có câu chưa trả lời
-                console.log("Nộp bài dù có câu chưa trả lời");
-                localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
-                window.location.href = 'result.html'; // Thay thế hàm showModal
+            showWarningModal("Còn câu hỏi chưa được trả lời. Bạn có muốn nộp bài không?", function() {
+                localStorage.setItem("quizResult", JSON.stringify(result));
+                localStorage.setItem("quizScore", score);
+                window.location.href = "result.html";
             });
         } else {
-            showConfirmModal("Bạn đã hoàn thành tất cả câu hỏi. Bạn có chắc chắn muốn nộp bài?", function() {
-                // Nộp bài
-                console.log("Nộp bài");
-                localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
-                window.location.href = 'result.html'; // Thay thế hàm showModal
+            showConfirmModal("Bạn có chắc chắn muốn nộp bài không?", function() {
+                localStorage.setItem("quizResult", JSON.stringify(result));
+                localStorage.setItem("quizScore", score);
+                window.location.href = "result.html";
             });
         }
     }
-    document.getElementById("prevQuestion").addEventListener("click", function() {
-        if (currentQuestion > 0) {
-            currentQuestion--;
-            displayQuiz();
-        }
-    });
-    
-    document.getElementById("nextQuestion").addEventListener("click", function() {
+
+    function nextQuestion() {
         if (currentQuestion < currentQuiz.length - 1) {
             currentQuestion++;
             displayQuiz();
         }
-    });
-    
-    var urlParams = new URLSearchParams(window.location.search);
-    var quizId = urlParams.get('quiz');
-    if (quizId && quizzes[quizId]) {
-        currentQuiz = quizzes[quizId];
-        displayQuiz();
     }
 
-    // Expose the functions to the global scope
-    window.displayQuiz = displayQuiz;
-    window.submitQuiz = submitQuiz;
+    function previousQuestion() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            displayQuiz();
+        }
+    }
+
+    window.onload = function() {
+        var quizName = new URLSearchParams(window.location.search).get("quiz");
+        currentQuiz = quizzes[quizName];
+        if (currentQuiz) {
+            displayQuiz();
+        } else {
+            alert("Quiz không tồn tại.");
+        }
+        document.getElementById("submitQuiz").onclick = submitQuiz;
+        document.getElementById("nextQuestion").onclick = nextQuestion;
+        document.getElementById("previousQuestion").onclick = previousQuestion;
+    };
 })();
