@@ -52,16 +52,43 @@
         }
     }
     function showConfirmModal(message, confirmCallback) {
-        if (window.confirm(message)) {
+        var modal = document.getElementById("confirmModal");
+        var span = document.getElementsByClassName("close")[0];
+        var yesButton = document.getElementById("confirmModalYes");
+        var noButton = document.getElementById("confirmModalNo");
+        document.getElementById("confirmModalText").innerText = message;
+        modal.style.display = "block";
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        yesButton.onclick = function() {
             confirmCallback();
+            modal.style.display = "none";
+        }
+        noButton.onclick = function() {
+            modal.style.display = "none";
         }
     }
-
+    
     function showWarningModal(message, confirmCallback) {
-        if (window.confirm(message)) {
+        var modal = document.getElementById("warningModal");
+        var span = document.getElementsByClassName("close")[1];
+        var yesButton = document.getElementById("warningModalYes");
+        var noButton = document.getElementById("warningModalNo");
+        document.getElementById("warningModalText").innerText = message;
+        modal.style.display = "block";
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        yesButton.onclick = function() {
             confirmCallback();
+            modal.style.display = "none";
+        }
+        noButton.onclick = function() {
+            modal.style.display = "none";
         }
     }
+    
     function submitQuiz() {
         var score = 0;
         var result = [];

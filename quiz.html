@@ -8,13 +8,23 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div id="myModal" class="modal">
+    <div id="confirmModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p id="modalText"></p>
-            <div id="modalContent"></div>
+            <p id="confirmModalText"></p>
+            <button id="confirmModalYes">Yes</button>
+            <button id="confirmModalNo">No</button>
         </div>
-    </div>            
+    </div>
+    
+    <div id="warningModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="warningModalText"></p>
+            <button id="warningModalYes">Yes</button>
+            <button id="warningModalNo">No</button>
+        </div>
+    </div>        
     <nav>
         <button onclick="location.href='index.html'">Trang chủ</button>
         <div class="dropdown">
