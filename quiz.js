@@ -15,9 +15,7 @@ var quizzes = {
             answers: ["A", "B", "C", "D"],
             correctAnswer: 2
         },
-        // Thêm câu hỏi tại đây
     ],
-    // Thêm bộ đề thi tại đây
 };
 
 var currentQuiz = null;
@@ -52,7 +50,6 @@ function displayQuiz() {
 }
 
 function submitQuiz() {
-    console.log("submitQuiz() has been called.");
     var score = 0;
     var result = [];
     for (var i = 0; i < currentQuiz.length; i++) {
@@ -61,34 +58,26 @@ function submitQuiz() {
         var answer = null;
         for (var j = 0; j < answerInputs.length; j++) {
             if (answerInputs[j].checked) {
-                answer = parseInt(answerInputs[j].value, 10);
+                answer = j;
                 break;
             }
         }
         if (answer === null) {
-            console.error("Câu " + (i + 1) + ": Bạn chưa trả lời.");
             alert("Bạn chưa trả lời tất cả các câu hỏi!");
             return;
         }
         if (answer == question.correctAnswer) {
             score++;
-            console.log("Câu " + (i + 1) + ": Bạn đã trả lời đúng.");
-        } else {
-            console.log("Câu " + (i + 1) + ": Bạn đã trả lời sai.");
         }
         result.push({
+            question: question.question,
             correctAnswer: question.answers[question.correctAnswer],
-            userAnswer: question.answers[answer]
+            userAnswer: answer !== null ? question.answers[answer] : null
         });
     }
     if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
         return;
     }
     localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
-    console.log("Bạn đã trả lời đúng " + score + " câu hỏi!");
     alert("Bạn đã trả lời đúng " + score + " câu hỏi!");
 }
-
-
-
-

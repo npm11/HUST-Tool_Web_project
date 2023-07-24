@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Trang chủ</title>
+    <title>Quiz App</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <nav>
-        <a href="index.html">Trang chủ</a> |
-        <div class="dropdown">
-            <button class="dropbtn">Thi thử</button>
-            <div class="dropdown-content">
-                <a href="ktmt.html">Thực hành KTMT</a>
-                <!-- Thêm môn thi tại đây -->
-            </div>
-        </div>
-    </nav>
-    <h1>Chào mừng đến với website thi thử của chúng tôi!</h1>
-    <p>Chọn "Thi thử" để bắt đầu.</p>
+    <h1>Welcome to the Quiz App</h1>
+    <select id="quizSelect">
+        <option value="ktmt">KTMT Quiz</option>
+        <!-- Add more quizzes here -->
+    </select>
+    <button onclick="loadQuiz()">Start Quiz</button>
+    <div id="quiz"></div>
+    <button onclick="submitQuiz()">Submit Quiz</button>
+    <script src="quiz.js"></script>
 </body>
 </html>

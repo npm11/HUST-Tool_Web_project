@@ -6,14 +6,13 @@ window.onload = function() {
     var scoreText = document.createElement("p");
     scoreText.textContent = "Điểm của bạn: " + score;
     resultDiv.appendChild(scoreText);
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < result.length; i++) {
         var resultText = document.createElement("p");
-        if (result[i].userAnswer !== undefined) {
-            resultText.textContent = "Câu " + (i + 1) + ": Đáp án đúng là " + result[i].correctAnswer + ", bạn đã chọn " + result[i].userAnswer;
+        if (result[i].userAnswer !== null) {
+            resultText.textContent = result[i].question + ": Đáp án đúng là " + result[i].correctAnswer + ", bạn đã chọn " + result[i].userAnswer;
         } else {
-            resultText.textContent = "Câu " + (i + 1) + ": Bạn không chọn đáp án.";
+            resultText.textContent = result[i].question + ": Bạn không chọn đáp án.";
         }
-        
         resultDiv.appendChild(resultText);
     }
 };
