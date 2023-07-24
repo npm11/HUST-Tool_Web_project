@@ -68,12 +68,12 @@ function submitQuiz() {
             alert("Bạn chưa trả lời tất cả các câu hỏi!");
             return;
         }
-        if (answer == question.correctAnswer) {
+        if (answer == question.answers[question.correctAnswer]) {
             score++;
         }
         result.push({
-            correctAnswer: question.correctAnswer,
-            userAnswer: answer
+            correctAnswer: question.answers[question.correctAnswer],
+            userAnswer: question.answers[answer]
         });
     }
     if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
@@ -82,3 +82,4 @@ function submitQuiz() {
     localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
     alert("Bạn đã trả lời đúng " + score + " câu hỏi!");
 }
+
