@@ -13,9 +13,17 @@ window.onload = function() {
     for (var i = 0; i < result.length; i++) {
         var resultText = document.createElement("p");
         if (result[i].userAnswer !== null) {
-            resultText.textContent = result[i].question + ": Đáp án đúng là " + result[i].correctAnswer + ", bạn đã chọn " + result[i].userAnswer;
+            var correctAnswer = result[i].correctAnswer;
+            if (typeof correctAnswer === 'number') {
+                correctAnswer = String.fromCharCode(65 + correctAnswer);
+            }
+            var userAnswer = result[i].userAnswer;
+            if (typeof userAnswer === 'number') {
+                userAnswer = String.fromCharCode(65 + userAnswer);
+            }
+            resultText.textContent = result[i].question + ": Đáp án đúng là " + correctAnswer + ", bạn đã chọn " + userAnswer;
         } else {
-            resultText.textContent = result[i].question + ": Bạn không chọn đáp án.";
+            resultText.textContent = result[i].question + ": Bạn không điền đáp án.";
         }
         resultDiv.appendChild(resultText);
     }
