@@ -48,6 +48,7 @@ function displayQuiz() {
 
 function submitQuiz() {
     var score = 0;
+    var result = [];
     for (var i = 0; i < currentQuiz.length; i++) {
         var question = currentQuiz[i];
         var answerInputs = document.getElementsByName("question" + i);
@@ -65,9 +66,14 @@ function submitQuiz() {
         if (answer == question.correctAnswer) {
             score++;
         }
+        result.push({
+            correctAnswer: question.correctAnswer,
+            userAnswer: answer
+        });
     }
     if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
         return;
     }
+    localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
     alert("Bạn đã trả lời đúng " + score + " câu hỏi!");
 }
