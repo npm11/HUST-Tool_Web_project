@@ -75,7 +75,7 @@
                 correctAnswer: "Đáp án" // Thay "Đáp án" bằng đáp án thực tế của bạn
             },
             // thêm thêm câu hỏi...
-        ],
+        ];
 
         var questionList = document.getElementById("questionList");
 
@@ -87,7 +87,7 @@
             listItem.addEventListener("click", function() {
                 showQuestion(index);
             });
-            questionList.appendChild(listItem);
+            questionList.querySelector("ul").appendChild(listItem);
         });
 
         // Hiển thị câu hỏi đầu tiên
@@ -110,20 +110,20 @@
             questionElement.appendChild(questionText);
 
             // Thêm các lựa chọn đáp án (radio buttons hoặc checkboxes)
-            for (var i = 0; i < questionData.options.length; i++) {
+            for (var i = 0; i < questionData.answers.length; i++) {
                 var optionLabel = document.createElement("label");
                 optionLabel.className = "ml-3";
 
                 var input = document.createElement("input");
-                input.type = questionData.answer.constructor === Array ? "checkbox" : "radio";
+                input.type = questionData.type === "multiple_choice" ? "radio" : "checkbox";
                 input.name = "answer";
                 input.value = i;
                 input.addEventListener("change", function() {
-                    saveAnswer(index, this.value, questionData.answer.constructor === Array);
+                    saveAnswer(index, this.value, questionData.type === "multiple_choice_multiple_answers");
                 });
 
                 optionLabel.appendChild(input);
-                optionLabel.appendChild(document.createTextNode(" " + questionData.options[i]));
+                optionLabel.appendChild(document.createTextNode(" " + questionData.answers[i]));
 
                 questionElement.appendChild(optionLabel);
             }
