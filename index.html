@@ -2,155 +2,42 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <title>Quiz</title>
+    <title>Quiz App</title>
     <meta http-equiv='cache-control' content='no-cache'> 
     <meta http-equiv='expires' content='0'> 
     <meta http-equiv='pragma' content='no-cache'>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div id="confirmModal" class="modal">
+    <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p id="confirmModalText"></p>
-            <button id="confirmModalYes" class="btn btn-primary">Yes</button>
-            <button id="confirmModalNo" class="btn btn-secondary">No</button>
-        </div>
-    </div>
-    
-    <div id="warningModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p id="warningModalText"></p>
-            <button id="warningModalYes" class="btn btn-primary">Yes</button>
-            <button id="warningModalNo" class="btn btn-secondary">No</button>
+            <p id="modalText"></p>
+            <div id="modalContent"></div>
         </div>
     </div>    
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div id="questionList" class="mb-3">
-                    <ul class="list-group">
-                        <!-- Danh sách câu hỏi sẽ được tạo tự động bởi script -->
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <h1 class="text-center">Quiz</h1>
-                <div id="currentQuestion"></div>
-                <form id="quiz" onsubmit="event.preventDefault(); submitQuiz();"></form>
-                <button type="submit" form="quiz" class="btn btn-primary mt-3">Submit Quiz</button>
-            </div>
+</div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalText"></p>
+            <div id="modalContent"></div>
         </div>
     </div>
+      
+    <nav>
+        <button onclick="location.href='index.html'">Trang chủ 46</button>
+        <div class="dropdown">
+            <button class="dropbtn">Thi thử</button>
+            <div class="dropdown-content">
+                <a href="quiz.html?quiz=ktmt">KTMT</a>
+                <!-- Add more quizzes here -->
+            </div>
+        </div>
+    </nav>
+    <h1>Welcome to the Quiz App</h1>
+    <p>Đây là ứng dụng thi trắc nghiệm trực tuyến. Bạn có thể chọn môn học từ menu "Thi thử" để bắt đầu.</p>
     <script src="quiz.js"></script>
-    <script>
-        // Dữ liệu câu hỏi (điền dữ liệu câu hỏi vào đây)
-        var questions = [
-            {
-                type: "multiple_choice",
-                question: "Thanh ghi nào có giá trị cố định, không thay đổi trong khi chạy chương trình?",
-                answers: ["$at", "$zero", "$sp", "hi", "pc"],
-                correctAnswer: 2
-            },
-            {
-                type: "multiple_choice_multiple_answers",
-                question: "Trong ứng dụng Mars, khi dịch từ mã nguồn sang mã cơ bản, những công việc nào sau đây sẽ được thực hiện? (có thể chọn nhiều đáp án)",
-                answers: ["Chuyển các nhãn thành địa chỉ", "Chuyển các thanh ghi từ tên sang số hiệu", "Chuyển các hằng số từ hệ thập phân sang hệ thập lục phân", "Thay thế giả lệnh bằng các lệnh cơ bản"],
-                correctAnswer: [1, 2, 4] // Giả sử tất cả các đáp án đều đúng
-            },
-            {
-                type: "fill_in",
-                question: "Giá trí của thanh ghi $a0 sau khi đoạn chương trình dưới được thực hiện là bao nhiêu? (điền số ở hệ thập phân).\n.text\n\tli $a0, 0\n\tli $a1, 0\n\tli $a2, 5\nl1:\n\tbeq $a1, $a2, end\n\tadd $at, $a1, $s1\n\tadd $a0, $a0, $at\n\taddi $ai, $ai, 1\n\tj l1\nend:",
-                correctAnswer: "thật à" // Thay "Đáp án" bằng đáp án thực tế của bạn
-            },
-            {
-                type: "fill_in",
-                question: "Đoạn chương trình sau in chuỗi ký tự gì ra màn hình Run I/O?\n.text\n\tli $a1, 0\n\tli $a2, 5\n\tli $v0, 11\nl1:\n\tbeq $a1, $a2, end\n\taddi $a0, $a1, 49\n\tsyscall \n\taddi $a1, $a1, 1\n\tj li\nend:",
-                correctAnswer: "địt cụ" // Thay "Đáp án" bằng đáp án thực tế của bạn
-            },
-            {
-                type: "fill_in",
-                question: "Dịch lệnh sau sang mã máy (viết dưới dạng số hexa có tiền tố 0x đứng trước)\n\taddi $a1, $a1, 1",
-                correctAnswer: "Đáp án" // Thay "Đáp án" bằng đáp án thực tế của bạn
-            },
-            // thêm thêm câu hỏi...
-        ],
-
-        var questionList = document.getElementById("questionList");
-
-        // Tạo danh sách câu hỏi
-        questions.forEach(function(question, index) {
-            var listItem = document.createElement("li");
-            listItem.className = "list-group-item";
-            listItem.textContent = "Câu " + (index + 1);
-            listItem.addEventListener("click", function() {
-                showQuestion(index);
-            });
-            questionList.appendChild(listItem);
-        });
-
-        // Hiển thị câu hỏi đầu tiên
-        showQuestion(0);
-
-        function showQuestion(index) {
-            // Xóa câu hỏi hiện tại
-            var currentQuestion = document.getElementById("currentQuestion");
-            while (currentQuestion.firstChild) {
-                currentQuestion.removeChild(currentQuestion.firstChild);
-            }
-
-            // Tạo câu hỏi mới
-            var questionData = questions[index];
-            var questionElement = document.createElement("div");
-            questionElement.className = "mb-3";
-
-            var questionText = document.createElement("h4");
-            questionText.textContent = "Câu " + (index + 1) + ": " + questionData.question;
-            questionElement.appendChild(questionText);
-
-            // Thêm các lựa chọn đáp án (radio buttons hoặc checkboxes)
-            for (var i = 0; i < questionData.options.length; i++) {
-                var optionLabel = document.createElement("label");
-                optionLabel.className = "ml-3";
-
-                var input = document.createElement("input");
-                input.type = questionData.answer.constructor === Array ? "checkbox" : "radio";
-                input.name = "answer";
-                input.value = i;
-                input.addEventListener("change", function() {
-                    saveAnswer(index, this.value, questionData.answer.constructor === Array);
-                });
-
-                optionLabel.appendChild(input);
-                optionLabel.appendChild(document.createTextNode(" " + questionData.options[i]));
-
-                questionElement.appendChild(optionLabel);
-            }
-
-            currentQuestion.appendChild(questionElement);
-        }
-
-        function saveAnswer(index, answer, isMultipleChoice) {
-            if (isMultipleChoice) {
-                // Nếu câu hỏi có nhiều lựa chọn đáp án (checkboxes)
-                var selectedAnswers = [];
-                var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                for (var i = 0; i < checkboxes.length; i++) {
-                    selectedAnswers.push(parseInt(checkboxes[i].value));
-                }
-                questions[index].userAnswer = selectedAnswers;
-            } else {
-                // Nếu câu hỏi có một lựa chọn đáp án duy nhất (radio buttons)
-                questions[index].userAnswer = parseInt(answer);
-            }
-        }
-
-        function submitQuiz() {
-            // Xử lý việc nộp bài (nếu cần)
-            console.log(questions);
-            // Submit bài thi...
-        }
-    </script>
 </body>
 </html>
