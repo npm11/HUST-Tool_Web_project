@@ -12,10 +12,12 @@ window.onload = function() {
     resultDiv.appendChild(scoreText);
     for (var i = 0; i < result.length; i++) {
         var resultText = document.createElement("p");
-        if (result[i].userAnswer !== null) {
+        if (result[i].userAnswer !== null && result[i].userAnswer !== "") {
             var correctAnswer = result[i].correctAnswer;
             if (typeof correctAnswer === 'number') {
                 correctAnswer = String.fromCharCode(65 + correctAnswer);
+            } else if (correctAnswer === "Đáp án") {
+                correctAnswer = "KTMT";
             }
             var userAnswer = result[i].userAnswer;
             if (typeof userAnswer === 'number') {
