@@ -23,9 +23,9 @@ window.onload = function() {
             if (typeof userAnswer === 'number') {
                 userAnswer = String.fromCharCode(65 + userAnswer);
             }
-            resultText.textContent = result[i].question + ": Đáp án đúng là " + correctAnswer + ", bạn đã chọn " + userAnswer;
+            resultText.textContent = "Câu hỏi " + (i + 1) + ": Đáp án đúng là " + correctAnswer + ", bạn đã chọn " + userAnswer + ".";
         } else {
-            resultText.textContent = result[i].question + ": Đáp án đúng là " + correctAnswer + ", bạn không điền đáp án.";
+            resultText.textContent = "Câu hỏi " + (i + 1) + ": Đáp án đúng là " + correctAnswer + ", bạn không điền đáp án.";
         }
         resultDiv.appendChild(resultText);
     }
