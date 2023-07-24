@@ -95,11 +95,13 @@ function confirmSubmit() {
     for (var i = 0; i < questions.length; i++) {
         var question = questions[i];
         var answer = question.userAnswer;
-        if (answer === null) {
-            alert("Bạn chưa trả lời tất cả các câu hỏi!");
-            return;
-        }
-        if (answer == question.correctAnswer) {
+        if (answer === undefined) {
+            result.push({
+                question: question.question,
+                correctAnswer: question.answers[question.correctAnswer],
+                userAnswer: "Không chọn"
+            });
+        } else if (answer == question.correctAnswer) {
             score++;
         } else {
             result.push({
