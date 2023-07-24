@@ -19,10 +19,12 @@ function displayQuestionList() {
     for (var i = 0; i < questions.length; i++) {
         var questionButton = document.createElement("button");
         questionButton.textContent = "Câu " + (i + 1);
+        questionButton.className = "question-button";
         questionButton.onclick = (function(i) {
             return function() {
                 currentQuestion = i;
                 displayQuestion();
+                updateQuestionButtons();
             };
         })(i);
         questionListDiv.appendChild(questionButton);
@@ -49,8 +51,30 @@ function displayQuestion() {
     }
 }
 
+function updateQuestionButtons() {
+    var buttons = document.querySelectorAll(".question-button");
+    buttons.forEach(function(button, index) {
+        if (index === currentQuestion) {
+            button.classList.add("current");
+        } else {
+            button.classList.remove("current");
+        }
+        if (questions[index].userAnswer !== undefined) {
+            button.classList.add("answered");
+        } else {
+            button.classList.remove("answered");
+        }
+    });
+}
+
 function submitQuiz() {
     var score = 0;
+    var unansweredQuestions = questions.filter(q => q.userAnswer === undefined);
+    if (unansweredQuestions.length > 0) {
+        if (!confirm("Bạn chưa trả lời tất cả các câu hỏi. Bạn có chắc chắn muốn nộp bài không?")) {
+            return;
+        }
+    }
     for (var i = 0; i < questions.length; i++) {
         var question = questions[i];
         var answerInputs = document.getElementsByName("answer");

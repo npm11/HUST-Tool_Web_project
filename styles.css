@@ -23,3 +23,34 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+.quiz-container {
+    display: flex;
+}
+
+.question-list {
+    flex: 1;
+    border-right: 1px solid #ccc;
+    padding-right: 20px;
+}
+
+.question-display {
+    flex: 2;
+    padding-left: 20px;
+}
+
+.question-button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.question-button:not(.answered):not(.current) {
+    background-color: red;
+}
+
+.question-button.answered {
+    background-color: green;
+}
+
+.question-button.current {
+    background-color: blue;
+}
