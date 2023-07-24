@@ -1,3 +1,11 @@
+var urlParams = new URLSearchParams(window.location.search);
+var quizId = urlParams.get('quiz');
+if (quizId && quizzes[quizId]) {
+    currentQuiz = quizzes[quizId];
+    displayQuiz();
+}
+
+
 var quizzes = {
     ktmt: [
         {

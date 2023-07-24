@@ -1,17 +1,30 @@
-body {
-    font-family: Arial, sans-serif;
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-h1 {
-    text-align: center;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
-#quiz {
-    margin: 0 auto;
-    width: 60%;
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
-#result {
-    margin: 0 auto;
-    width: 60%;
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
 }

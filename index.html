@@ -5,14 +5,18 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+    <nav>
+        <button onclick="location.href='index.html'">Trang chủ</button>
+        <div class="dropdown">
+            <button class="dropbtn">Thi thử</button>
+            <div class="dropdown-content">
+                <a href="quiz.html?quiz=ktmt">KTMT</a>
+                <!-- Add more quizzes here -->
+            </div>
+        </div>
+    </nav>
     <h1>Welcome to the Quiz App</h1>
-    <select id="quizSelect">
-        <option value="ktmt">KTMT Quiz</option>
-        <!-- Add more quizzes here -->
-    </select>
-    <button onclick="loadQuiz()">Start Quiz</button>
-    <div id="quiz"></div>
-    <button onclick="submitQuiz()">Submit Quiz</button>
+    <p>Đây là ứng dụng thi trắc nghiệm trực tuyến. Bạn có thể chọn môn học từ menu "Thi thử" để bắt đầu.</p>
     <script src="quiz.js"></script>
 </body>
 </html>
