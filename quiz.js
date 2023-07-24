@@ -117,6 +117,7 @@ function submitQuiz() {
         }
         if (answer === null) {
             unanswered = true;
+            console.log("Câu hỏi " + (i + 1) + " chưa được trả lời.");
         }
         if (answer == question.correctAnswer) {
             score++;
@@ -143,4 +144,5 @@ function submitQuiz() {
         });
     }
 }
+
 
