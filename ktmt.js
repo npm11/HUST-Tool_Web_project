@@ -44,6 +44,13 @@ function displayQuestion() {
         answerInput.type = "radio";
         answerInput.name = "answer";
         answerInput.value = i;
+        answerInput.checked = i === question.userAnswer;
+        answerInput.onchange = (function(i) {
+            return function() {
+                questions[currentQuestion].userAnswer = i;
+                updateQuestionButtons();
+            };
+        })(i);
         var answerLabel = document.createElement("label");
         answerLabel.textContent = answer;
         questionDisplayDiv.appendChild(answerInput);
@@ -77,14 +84,7 @@ function submitQuiz() {
     }
     for (var i = 0; i < questions.length; i++) {
         var question = questions[i];
-        var answerInputs = document.getElementsByName("answer");
-        var answer = null;
-        for (var j = 0; j < answerInputs.length; j++) {
-            if (answerInputs[j].checked) {
-                answer = answerInputs[j].value;
-                break;
-            }
-        }
+        var answer = question.userAnswer;
         if (answer === null) {
             alert("Bạn chưa trả lời tất cả các câu hỏi!");
             return;
