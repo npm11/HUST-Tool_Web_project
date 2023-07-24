@@ -187,10 +187,11 @@ document.getElementById('new-subject-form').addEventListener('submit', function(
     var subjectCode = document.getElementById('subject-code').value;
     if (subjectCode && !quizzes[subjectCode]) {
       quizzes[subjectCode] = []; // Thêm môn thi mới với mã môn thi làm khóa và giá trị là một mảng rỗng
-      updateDropdownMenu(); // Cập nhật dropdown menu
       alert('Đã thêm môn thi mới: ' + subjectCode);
+      updateDropdownMenu(); // Cập nhật dropdown menu
     } else {
       alert('Mã môn thi đã tồn tại hoặc không hợp lệ!');
     }
-  });
+});
+
   
