@@ -15,7 +15,11 @@ var questions = [
         answers: ["A", "B", "C", "D"],
         correctAnswer: 1
     },
-    // Thêm câu hỏi tại đây
+    {
+        question: "Câu hỏi 3",
+        answers: ["A", "B", "C", "D"],
+        correctAnswer: 2
+    }
 ];
 
 var currentQuestion = 0;
@@ -111,7 +115,8 @@ function confirmSubmit() {
             });
         }
     }
-    localStorage.setItem('myUniqueKey', JSON.stringify(result));
+    var finalScore = (score / questions.length * 10).toFixed(2);
+    localStorage.setItem('myUniqueKey', JSON.stringify({result: result, score: finalScore}));
     window.location.href = 'result.html';
 }
 
