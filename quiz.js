@@ -32,7 +32,7 @@
             {
                 type: "fill_in",
                 question: "TEst Q\naddi $a1, $a1, 1",
-                correctAnswer: "KTMT" // Thay "Đáp án" bằng đáp án thực tế của bạn
+                correctAnswer: "KTMt" // Thay "Đáp án" bằng đáp án thực tế của bạn
             },
             // thêm thêm câu hỏi...
         ],
