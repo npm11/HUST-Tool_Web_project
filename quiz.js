@@ -122,7 +122,7 @@
         questionListDiv.innerHTML = "";
         questionListDiv.style.border = "3px solid #007BFF"; // Thay đổi màu viền
         questionListDiv.style.padding = "10px"; // Thêm padding cho khung
-        questionListDiv.style.height = "300px"; // Đặt chiều cao cố định
+        questionListDiv.style.height = "330px"; // Đặt chiều cao cố định
         questionListDiv.style.overflow = "auto"; // Hiển thị thanh cuộn nếu cần
         questionListDiv.style.borderRadius = "20px"; // Bo góc của khung
         questionListDiv.style.boxShadow = "0 0 10px rgba(0,0,0,0.1)"; // Thêm hiệu ứng đổ bóng
