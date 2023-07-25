@@ -166,3 +166,7 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     font-weight: bold;
     margin-right: 10px;
 }
+.submit-button-container {
+    position: sticky;
+    bottom: 0;
+}

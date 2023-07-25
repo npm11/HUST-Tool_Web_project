@@ -44,9 +44,11 @@
     <div class="container">
         <div class="row">
             <div id="questionList" class="col-12 col-md-4"></div>
-            <div class="col-12 col-md-8 position-relative"> <!-- Thêm class position-relative vào đây -->
+            <div class="col-12 col-md-8">
                 <form id="quiz" onsubmit="event.preventDefault(); submitQuiz();"></form>
-                <button type="submit" form="quiz" class="btn btn-primary mt-3 position-absolute bottom-0">Submit Quiz</button> <!-- Thêm class position-absolute và bottom-0 vào đây -->
+                <div class="submit-button-container"> <!-- Tạo một khung chứa cho nút Submit -->
+                    <button type="submit" form="quiz" class="btn btn-primary mt-3">Submit Quiz</button>
+                </div>
             </div>
         </div>
     </div>    
