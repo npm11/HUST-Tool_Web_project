@@ -73,7 +73,7 @@
                     answerInput.checked = true;
                 }
                 var answerLabelPrefix = document.createElement("label");
-                answerLabelPrefix.textContent = String.fromCharCode(65 + j) + ". ";
+                answerLabelPrefix.textContent = String.fromCharCode(65 + j) + ". "; // Thêm dấu cách sau dấu chấm
                 answerLabelPrefix.className = "answer-prefix";
                 var answerLabel = document.createElement("label");
                 answerLabel.textContent = answer;
@@ -93,7 +93,7 @@
                     answerInput.checked = true;
                 }
                 var answerLabelPrefix = document.createElement("label");
-                answerLabelPrefix.textContent = String.fromCharCode(65 + j) + ". ";
+                answerLabelPrefix.textContent = String.fromCharCode(65 + j) + ". "; // Thêm dấu cách sau dấu chấm
                 answerLabelPrefix.className = "answer-prefix";
                 var answerLabel = document.createElement("label");
                 answerLabel.textContent = answer;
@@ -128,6 +128,7 @@
             questionListDiv.appendChild(questionButton);
         }
     }
+    
     
     
     function saveAnswer(index) {
