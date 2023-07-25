@@ -40,10 +40,12 @@
     </nav>
     <h1 class="text-center">Quiz</h1>
     <div class="container">
-        <div id="questionList" style="float: left; width: 20%;"></div>
-        <div style="float: right; width: 80%;">
-            <form id="quiz" onsubmit="event.preventDefault(); submitQuiz();"></form>
-            <button type="submit" form="quiz" class="btn btn-primary mt-3">Submit Quiz</button>
+        <div class="row">
+            <div id="questionList" class="col-12 col-md-4"></div>
+            <div class="col-12 col-md-8">
+                <form id="quiz" onsubmit="event.preventDefault(); submitQuiz();"></form>
+                <button type="submit" form="quiz" class="btn btn-primary mt-3">Submit Quiz</button>
+            </div>
         </div>
     </div>
     <script src="quiz.js"></script>

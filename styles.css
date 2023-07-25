@@ -130,3 +130,6 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     flex-direction: column;
     width: 100%;
 }
+* {
+    box-sizing: border-box;
+}

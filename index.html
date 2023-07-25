@@ -26,18 +26,22 @@
         </div>
     </div>
       
-    <nav>
-        <button onclick="location.href='index.html'">Trang chủ 11</button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button onclick="location.href='index.html'" class="btn btn-primary">Trang chủ</button>
         <div class="dropdown">
-            <button class="dropbtn">Thi thử</button>
-            <div class="dropdown-content">
-                <a href="quiz.html?quiz=ktmt">KTMT</a>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Thi thử
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="quiz.html?quiz=ktmt">KTMT</a>
                 <!-- Add more quizzes here -->
             </div>
         </div>
     </nav>
-    <h1>Welcome to the Quiz App</h1>
-    <p>Đây là ứng dụng thi trắc nghiệm trực tuyến. Bạn có thể chọn môn học từ menu "Thi thử" để bắt đầu.</p>
+    <div class="container">
+        <h1>Welcome to the Quiz App</h1>
+        <p>Đây là ứng dụng thi trắc nghiệm trực tuyến. Bạn có thể chọn môn học từ menu "Thi thử" để bắt đầu.</p>
+    </div>
     <script src="quiz.js"></script>
 </body>
 </html>
