@@ -33,63 +33,106 @@
         ],
         
     };
-
+    var currentQuestionIndex = 0;
+    var userAnswers = new Array(currentQuiz.length).fill(null);
     var currentQuiz = null;
 
     function displayQuiz() {
         var quizDiv = document.getElementById("quiz");
         quizDiv.innerHTML = "";
-        for (var i = 0; i < currentQuiz.length; i++) {
-            var question = currentQuiz[i];
-            var questionDiv = document.createElement("div");
-            questionDiv.style.marginBottom = "20px"; // Tạo khoảng cách giữa các cụm câu hỏi-đáp án
-            var questionText = document.createElement("p");
-            questionText.textContent = (i + 1) + ". " + question.question.split("\n")[0]; // Thêm số thứ tự cho câu hỏi
-            questionText.style.fontWeight = "bold"; // Làm cho câu hỏi in đậm
-            questionDiv.appendChild(questionText);
-            if (question.question.includes("\n")) {
-                var codeBlock = document.createElement("pre");
-                var code = document.createElement("code");
-                code.textContent = question.question.split("\n").slice(1).join("\n");
-                codeBlock.appendChild(code);
-                questionDiv.appendChild(codeBlock);
-            }
-            if (question.type === "multiple_choice") {
-                for (var j = 0; j < question.answers.length; j++) {
-                    var answer = question.answers[j];
-                    var answerInput = document.createElement("input");
-                    answerInput.type = "radio";
-                    answerInput.name = "question" + i;
-                    answerInput.value = j;
-                    var answerLabel = document.createElement("label");
-                    answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer; // Thêm số thứ tự cho đáp án
-                    questionDiv.appendChild(answerInput);
-                    questionDiv.appendChild(answerLabel);
-                    questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
-                }
-            } else if (question.type === "multiple_choice_multiple_answers") {
-                for (var j = 0; j < question.answers.length; j++) {
-                    var answer = question.answers[j];
-                    var answerInput = document.createElement("input");
-                    answerInput.type = "checkbox";
-                    answerInput.name = "question" + i;
-                    answerInput.value = j;
-                    var answerLabel = document.createElement("label");
-                    answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer; // Thêm số thứ tự cho đáp án
-                    questionDiv.appendChild(answerInput);
-                    questionDiv.appendChild(answerLabel);
-                    questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
-                }
-            } else if (question.type === "fill_in") {
+    
+        var question = currentQuiz[currentQuestionIndex];
+        var questionDiv = document.createElement("div");
+        questionDiv.style.marginBottom = "20px"; // Tạo khoảng cách giữa các cụm câu hỏi-đáp án
+        var questionText = document.createElement("p");
+        questionText.textContent = (currentQuestionIndex + 1) + ". " + question.question.split("\n")[0]; // Thêm số thứ tự cho câu hỏi
+        questionText.style.fontWeight = "bold"; // Làm cho câu hỏi in đậm
+        questionDiv.appendChild(questionText);
+        if (question.question.includes("\n")) {
+            var codeBlock = document.createElement("pre");
+            var code = document.createElement("code");
+            code.textContent = question.question.split("\n").slice(1).join("\n");
+            codeBlock.appendChild(code);
+            questionDiv.appendChild(codeBlock);
+        }
+        if (question.type === "multiple_choice") {
+            for (var j = 0; j < question.answers.length; j++) {
+                var answer = question.answers[j];
                 var answerInput = document.createElement("input");
-                answerInput.type = "text";
-                answerInput.name = "question" + i;
+                answerInput.type = "radio";
+                answerInput.name = "question" + currentQuestionIndex;
+                answerInput.value = j;
+                if (userAnswers[currentQuestionIndex] == j) {
+                    answerInput.checked = true;
+                }
+                var answerLabel = document.createElement("label");
+                answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer; // Thêm số thứ tự cho đáp án
                 questionDiv.appendChild(answerInput);
+                questionDiv.appendChild(answerLabel);
+                questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
             }
-            quizDiv.appendChild(questionDiv);
+        } else if (question.type === "multiple_choice_multiple_answers") {
+            for (var j = 0; j < question.answers.length; j++) {
+                var answer = question.answers[j];
+                var answerInput = document.createElement("input");
+                answerInput.type = "checkbox";
+                answerInput.name = "question" + currentQuestionIndex;
+                answerInput.value = j;
+                if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].includes(j)) {
+                    answerInput.checked = true;
+                }
+                var answerLabel = document.createElement("label");
+                answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer; // Thêm số thứ tự cho đáp án
+                questionDiv.appendChild(answerInput);
+                questionDiv.appendChild(answerLabel);
+                questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
+            }
+        } else if (question.type === "fill_in") {
+            var answerInput = document.createElement("input");
+            answerInput.type = "text";
+            answerInput.name = "question" + currentQuestionIndex;
+            answerInput.value = userAnswers[currentQuestionIndex] || "";
+            questionDiv.appendChild(answerInput);
+        }
+        quizDiv.appendChild(questionDiv);
+    
+        // Thêm danh sách câu hỏi ở bên trái
+        var questionListDiv = document.getElementById("questionList");
+        questionListDiv.innerHTML = "";
+        for (var i = 0; i < currentQuiz.length; i++) {
+            var questionListItem = document.createElement("div");
+            questionListItem.textContent = "Câu " + (i + 1);
+            questionListItem.onclick = function(index) {
+                return function() {
+                    saveAnswer(currentQuestionIndex);
+                    currentQuestionIndex = index;
+                    displayQuiz();
+                }
+            }(i);
+            questionListDiv.appendChild(questionListItem);
         }
     }
-
+    
+    function saveAnswer(index) {
+        var answerInputs = document.getElementsByName("question" + index);
+        if (currentQuiz[index].type === "multiple_choice") {
+            for (var j = 0; j < answerInputs.length; j++) {
+                if (answerInputs[j].checked) {
+                    userAnswers[index] = j;
+                    break;
+                }
+            }
+        } else if (currentQuiz[index].type === "multiple_choice_multiple_answers") {
+            userAnswers[index] = [];
+            for (var j = 0; j < answerInputs.length; j++) {
+                if (answerInputs[j].checked) {
+                    userAnswers[index].push(j);
+                }
+            }
+        } else if (currentQuiz[index].type === "fill_in") {
+            userAnswers[index] = answerInputs[0].value;
+        }
+    }
     function showConfirmModal(message, confirmCallback) {
         var modal = document.getElementById("confirmModal");
         var span = document.getElementsByClassName("close")[0];
@@ -121,33 +164,15 @@
             modal.style.display = "none";
         }
     }
-    
-    
     function submitQuiz() {
+        saveAnswer(currentQuestionIndex); // Lưu câu trả lời cuối cùng
+    
         var score = 0;
         var result = [];
         var unanswered = false;
         for (var i = 0; i < currentQuiz.length; i++) {
             var question = currentQuiz[i];
-            var answerInputs = document.getElementsByName("question" + i);
-            var answer = null;
-            if (question.type === "multiple_choice") {
-                for (var j = 0; j < answerInputs.length; j++) {
-                    if (answerInputs[j].checked) {
-                        answer = j;
-                        break;
-                    }
-                }
-            } else if (question.type === "multiple_choice_multiple_answers") {
-                answer = [];
-                for (var j = 0; j < answerInputs.length; j++) {
-                    if (answerInputs[j].checked) {
-                        answer.push(j);
-                    }
-                }
-            } else if (question.type === "fill_in") {
-                answer = answerInputs[0].value;
-            }
+            var answer = userAnswers[i];
             if (answer === null || answer === "" || (Array.isArray(answer) && answer.length === 0)) {
                 unanswered = true;
                 console.log("Câu hỏi " + (i + 1) + " chưa được trả lời.");
@@ -182,6 +207,7 @@
             });
         }
     }
+    
     
 
     var urlParams = new URLSearchParams(window.location.search);
