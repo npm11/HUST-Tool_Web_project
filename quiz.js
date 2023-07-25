@@ -73,7 +73,6 @@
                     answerInput.checked = true;
                 }
                 var answerLabelPrefix = document.createElement("label");
-                answerLabel.className = "answer-prefix";
                 answerLabelPrefix.textContent = String.fromCharCode(65 + j) + "."; // Thêm dấu cách sau dấu chấm
                 answerLabelPrefix.className = "answer-prefix";
                 var answerLabel = document.createElement("label");
@@ -82,6 +81,7 @@
                 questionDiv.appendChild(answerLabelPrefix);
                 questionDiv.appendChild(answerLabel);
                 questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
+                
             }
         } else if (question.type === "multiple_choice_multiple_answers") {
             for (var j = 0; j < question.answers.length; j++) {
@@ -94,7 +94,6 @@
                     answerInput.checked = true;
                 }
                 var answerLabelPrefix = document.createElement("label");
-                answerLabel.className = "answer-prefix";
                 answerLabelPrefix.textContent = String.fromCharCode(65 + j) + "."; // Thêm dấu cách sau dấu chấm
                 answerLabelPrefix.className = "answer-prefix";
                 var answerLabel = document.createElement("label");
@@ -102,7 +101,7 @@
                 questionDiv.appendChild(answerInput);
                 questionDiv.appendChild(answerLabelPrefix);
                 questionDiv.appendChild(answerLabel);
-                questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
+                questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án                
             }
         } else if (question.type === "fill_in") {
             var answerInput = document.createElement("input");
