@@ -109,9 +109,18 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 60%; /* Giảm chiều rộng của popup */
+    width: 50%; /* Giảm chiều rộng của popup */
     max-width: 500px; /* Đặt chiều rộng tối đa cho popup */
     border-radius: 10px; /* Làm tròn góc của popup */
+    text-align: center; /* Căn giữa nội dung */
+    height: auto; /* Đặt chiều cao tự động */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
 }
 
 .close {
