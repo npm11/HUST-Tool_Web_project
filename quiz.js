@@ -34,8 +34,16 @@
         
     };
     var currentQuestionIndex = 0;
-    var userAnswers = new Array(currentQuiz.length).fill(null);
+    var userAnswers = null;
     var currentQuiz = null;
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var quizId = urlParams.get('quiz');
+    if (quizId && quizzes[quizId]) {
+        currentQuiz = quizzes[quizId];
+        userAnswers = new Array(currentQuiz.length).fill(null); // Khởi tạo userAnswers sau khi currentQuiz đã được khởi tạo
+        displayQuiz();
+    }
 
     function displayQuiz() {
         var quizDiv = document.getElementById("quiz");
