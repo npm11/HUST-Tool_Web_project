@@ -73,7 +73,7 @@
                     answerInput.checked = true;
                 }
                 var answerLabelPrefix = document.createElement("label");
-                answerLabelPrefix.textContent = String.fromCharCode(65 + j) + ". "; // Thêm dấu cách sau dấu chấm
+                answerLabelPrefix.textContent = String.fromCharCode(65 + j) + ".&nbsp;"; // Thêm dấu cách sau dấu chấm
                 answerLabelPrefix.className = "answer-prefix";
                 var answerLabel = document.createElement("label");
                 answerLabel.textContent = answer;
@@ -93,7 +93,7 @@
                     answerInput.checked = true;
                 }
                 var answerLabelPrefix = document.createElement("label");
-                answerLabelPrefix.textContent = String.fromCharCode(65 + j) + ". "; // Thêm dấu cách sau dấu chấm
+                answerLabelPrefix.textContent = String.fromCharCode(65 + j) + ".&nbsp;"; // Thêm dấu cách sau dấu chấm
                 answerLabelPrefix.className = "answer-prefix";
                 var answerLabel = document.createElement("label");
                 answerLabel.textContent = answer;
