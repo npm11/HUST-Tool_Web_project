@@ -90,7 +90,7 @@
     }
 
     function displayQuestionList() {
-        var questionListDiv = document.getElementById("questionList");
+        var questionListDiv = document.getElementById("question-list"); // Thay "questionList" bằng "question-list"
         questionListDiv.innerHTML = "";
         for (var i = 0; i < currentQuiz.length; i++) {
             var questionListItem = document.createElement("li");
@@ -104,6 +104,7 @@
             questionListDiv.appendChild(questionListItem);
         }
     }
+    
 
     function showConfirmModal(message, confirmCallback) {
         var modal = document.getElementById("confirmModal");
