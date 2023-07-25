@@ -35,76 +35,60 @@
     };
 
     var currentQuiz = null;
-    var currentQuestionIndex = 0;
 
     function displayQuiz() {
         var quizDiv = document.getElementById("quiz");
         quizDiv.innerHTML = "";
-        var question = currentQuiz[currentQuestionIndex];
-        var questionDiv = document.createElement("div");
-        questionDiv.style.marginBottom = "20px";
-        var questionText = document.createElement("p");
-        questionText.textContent = (currentQuestionIndex + 1) + ". " + question.question.split("\n")[0];
-        questionText.style.fontWeight = "bold";
-        questionDiv.appendChild(questionText);
-        if (question.question.includes("\n")) {
-            var codeBlock = document.createElement("pre");
-            var code = document.createElement("code");
-            code.textContent = question.question.split("\n").slice(1).join("\n");
-            codeBlock.appendChild(code);
-            questionDiv.appendChild(codeBlock);
-        }
-        if (question.type === "multiple_choice") {
-            for (var j = 0; j < question.answers.length; j++) {
-                var answer = question.answers[j];
-                var answerInput = document.createElement("input");
-                answerInput.type = "radio";
-                answerInput.name = "question" + currentQuestionIndex;
-                answerInput.value = j;
-                var answerLabel = document.createElement("label");
-                answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer;
-                questionDiv.appendChild(answerInput);
-                questionDiv.appendChild(answerLabel);
-                questionDiv.appendChild(document.createElement("br"));
-            }
-        } else if (question.type === "multiple_choice_multiple_answers") {
-            for (var j = 0; j < question.answers.length; j++) {
-                var answer = question.answers[j];
-                var answerInput = document.createElement("input");
-                answerInput.type = "checkbox";
-                answerInput.name = "question" + currentQuestionIndex;
-                answerInput.value = j;
-                var answerLabel = document.createElement("label");
-                answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer;
-                questionDiv.appendChild(answerInput);
-                questionDiv.appendChild(answerLabel);
-                questionDiv.appendChild(document.createElement("br"));
-            }
-        } else if (question.type === "fill_in") {
-            var answerInput = document.createElement("input");
-            answerInput.type = "text";
-            answerInput.name = "question" + currentQuestionIndex;
-            questionDiv.appendChild(answerInput);
-        }
-        quizDiv.appendChild(questionDiv);
-    }
-
-    function displayQuestionList() {
-        var questionListDiv = document.getElementById("question-list"); // Thay "questionList" bằng "question-list"
-        questionListDiv.innerHTML = "";
         for (var i = 0; i < currentQuiz.length; i++) {
-            var questionListItem = document.createElement("li");
-            questionListItem.textContent = "Câu " + (i + 1);
-            questionListItem.onclick = (function(index) {
-                return function() {
-                    currentQuestionIndex = index;
-                    displayQuiz();
-                };
-            })(i);
-            questionListDiv.appendChild(questionListItem);
+            var question = currentQuiz[i];
+            var questionDiv = document.createElement("div");
+            questionDiv.style.marginBottom = "20px"; // Tạo khoảng cách giữa các cụm câu hỏi-đáp án
+            var questionText = document.createElement("p");
+            questionText.textContent = (i + 1) + ". " + question.question.split("\n")[0]; // Thêm số thứ tự cho câu hỏi
+            questionText.style.fontWeight = "bold"; // Làm cho câu hỏi in đậm
+            questionDiv.appendChild(questionText);
+            if (question.question.includes("\n")) {
+                var codeBlock = document.createElement("pre");
+                var code = document.createElement("code");
+                code.textContent = question.question.split("\n").slice(1).join("\n");
+                codeBlock.appendChild(code);
+                questionDiv.appendChild(codeBlock);
+            }
+            if (question.type === "multiple_choice") {
+                for (var j = 0; j < question.answers.length; j++) {
+                    var answer = question.answers[j];
+                    var answerInput = document.createElement("input");
+                    answerInput.type = "radio";
+                    answerInput.name = "question" + i;
+                    answerInput.value = j;
+                    var answerLabel = document.createElement("label");
+                    answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer; // Thêm số thứ tự cho đáp án
+                    questionDiv.appendChild(answerInput);
+                    questionDiv.appendChild(answerLabel);
+                    questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
+                }
+            } else if (question.type === "multiple_choice_multiple_answers") {
+                for (var j = 0; j < question.answers.length; j++) {
+                    var answer = question.answers[j];
+                    var answerInput = document.createElement("input");
+                    answerInput.type = "checkbox";
+                    answerInput.name = "question" + i;
+                    answerInput.value = j;
+                    var answerLabel = document.createElement("label");
+                    answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer; // Thêm số thứ tự cho đáp án
+                    questionDiv.appendChild(answerInput);
+                    questionDiv.appendChild(answerLabel);
+                    questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
+                }
+            } else if (question.type === "fill_in") {
+                var answerInput = document.createElement("input");
+                answerInput.type = "text";
+                answerInput.name = "question" + i;
+                questionDiv.appendChild(answerInput);
+            }
+            quizDiv.appendChild(questionDiv);
         }
     }
-    
 
     function showConfirmModal(message, confirmCallback) {
         var modal = document.getElementById("confirmModal");
@@ -204,7 +188,6 @@
     var quizId = urlParams.get('quiz');
     if (quizId && quizzes[quizId]) {
         currentQuiz = quizzes[quizId];
-        displayQuestionList();
         displayQuiz();
     }
 

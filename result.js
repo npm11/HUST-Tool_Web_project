@@ -35,4 +35,3 @@ window.onload = function() {
     }
     localStorage.removeItem('myUniqueKey'); // Xóa dữ liệu từ localStorage
 };
- 
