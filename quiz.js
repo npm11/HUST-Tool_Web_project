@@ -27,12 +27,12 @@
             {
                 type: "fill_in",
                 question: "Dịch lệnh sau sang mã máy (viết dưới dạng số hexa có tiền tố 0x đứng trước)\naddi $a1, $a1, 1",
-                correctAnswer: "Đáp án" // Thay "Đáp án" bằng đáp án thực tế của bạn
+                correctAnswer: KTMT // Thay "Đáp án" bằng đáp án thực tế của bạn
             },
             {
                 type: "fill_in",
                 question: "TEst Q\naddi $a1, $a1, 1",
-                correctAnswer: "Đáp án" // Thay "Đáp án" bằng đáp án thực tế của bạn
+                correctAnswer: KTMT // Thay "Đáp án" bằng đáp án thực tế của bạn
             },
             // thêm thêm câu hỏi...
         ],
