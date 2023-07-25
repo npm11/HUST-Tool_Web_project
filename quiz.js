@@ -108,16 +108,17 @@
         var questionListDiv = document.getElementById("questionList");
         questionListDiv.innerHTML = "";
         for (var i = 0; i < currentQuiz.length; i++) {
-            var questionListItem = document.createElement("div");
-            questionListItem.textContent = "Câu " + (i + 1);
-            questionListItem.onclick = function(index) {
+            var questionButton = document.createElement("button");
+            questionButton.textContent = "Câu " + (i + 1);
+            questionButton.className = "btn btn-primary m-1";
+            questionButton.onclick = function(index) {
                 return function() {
                     saveAnswer(currentQuestionIndex);
                     currentQuestionIndex = index;
                     displayQuiz();
                 }
             }(i);
-            questionListDiv.appendChild(questionListItem);
+            questionListDiv.appendChild(questionButton);
         }
     }
     
