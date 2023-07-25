@@ -12,17 +12,17 @@
                 type: "multiple_choice_multiple_answers",
                 question: "Trong ứng dụng Mars, khi dịch từ mã nguồn sang mã cơ bản, những công việc nào sau đây sẽ được thực hiện? (có thể chọn nhiều đáp án)",
                 answers: ["Chuyển các nhãn thành địa chỉ", "Chuyển các thanh ghi từ tên sang số hiệu", "Chuyển các hằng số từ hệ thập phân sang hệ thập lục phân", "Thay thế giả lệnh bằng các lệnh cơ bản"],
-                correctAnswer: [1, 2, 4] // Giả sử tất cả các đáp án đều đúng
+                correctAnswer: [0, 1, 3] // Giả sử tất cả các đáp án đều đúng
             },
             {
                 type: "fill_in",
                 question: "Giá trí của thanh ghi $a0 sau khi đoạn chương trình dưới được thực hiện là bao nhiêu? (điền số ở hệ thập phân).\n.text\n\tli $a0, 0\n\tli $a1, 0\n\tli $a2, 5\nl1:\n\tbeq $a1, $a2, end\n\tadd $at, $a1, $s1\n\tadd $a0, $a0, $at\n\taddi $ai, $ai, 1\n\tj l1\nend:",
-                correctAnswer: "thật à" // Thay "Đáp án" bằng đáp án thực tế của bạn
+                correctAnswer: "(?)" // Thay "Đáp án" bằng đáp án thực tế của bạn
             },
             {
                 type: "fill_in",
                 question: "Đoạn chương trình sau in chuỗi ký tự gì ra màn hình Run I/O?\n.text\n\tli $a1, 0\n\tli $a2, 5\n\tli $v0, 11\nl1:\n\tbeq $a1, $a2, end\n\taddi $a0, $a1, 49\n\tsyscall \n\taddi $a1, $a1, 1\n\tj li\nend:",
-                correctAnswer: "địt cụ" // Thay "Đáp án" bằng đáp án thực tế của bạn
+                correctAnswer: "(?)" // Thay "Đáp án" bằng đáp án thực tế của bạn
             },
             {
                 type: "fill_in",
