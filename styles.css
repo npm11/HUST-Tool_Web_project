@@ -107,19 +107,19 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 10px; /* Giảm padding */
+    padding: 20px; /* Giảm padding */
     border: 1px solid #888;
-    width: 300px; /* Đặt chiều rộng cố định */
+    width: 270px; /* Đặt chiều rộng cố định */
     border-radius: 10px; /* Làm tròn góc của popup */
     text-align: center; /* Căn giữa nội dung */
-    height: 200px; /* Đặt chiều cao cố định */
+    min-height: 150px; /* Đặt chiều cao tối thiểu */
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .modal-content p {
-    margin-bottom: 20px;
+    margin-bottom: 4px;
 }
 .modal-content .button-group {
     display: flex;
@@ -142,15 +142,15 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
 
 /* Thêm một số phong cách cho nút trong popup */
 .modal-content button {
-    margin-top: 20px;
+    margin-top: 9px;
     padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+    border: #269226;
+    border-radius: 20px;
     background-color: #007BFF;
-    color: white;
+    color: #e9ecef;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 45%; /* Đặt chiều rộng cho các nút */
+    transition: background-color 0.2s ease;
+    width: 40%; /* Đặt chiều rộng cho các nút */
 }
 
 .modal-content button:hover {
