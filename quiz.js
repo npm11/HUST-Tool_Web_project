@@ -205,7 +205,7 @@
                 if (answer.length === question.correctAnswer.length && answer.every((v, k) => question.correctAnswer.includes(v))) {
                     score++;
                 }
-            } else if (answer == question.correctAnswer) {
+            } else if (answer === question.correctAnswer) { // Sử dụng toán tử === thay vì ==
                 score++;
             }
             result.push({
