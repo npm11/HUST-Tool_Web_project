@@ -130,18 +130,3 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     flex-direction: column;
     width: 100%;
 }
-#questionList a {
-    display: block;
-}
-
-#questionList a.current {
-    color: gray;
-}
-
-#questionList a.unanswered {
-    color: red;
-}
-
-#questionList a.answered {
-    color: green;
-}

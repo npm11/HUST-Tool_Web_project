@@ -89,47 +89,6 @@
             quizDiv.appendChild(questionDiv);
         }
     }
-// Khi người dùng chọn một câu trả lời
-function selectAnswer(questionIndex, answerIndex) {
-    // Cập nhật trạng thái câu hỏi
-    questions[questionIndex].status = 'answered';
-    // Cập nhật giao diện
-    updateQuestionList();
-}
-
-// Khi người dùng nhấp vào một liên kết trong danh sách câu hỏi
-// Khi người dùng nhấp vào một liên kết trong danh sách câu hỏi
-function selectQuestion(questionIndex) {
-    // Cập nhật câu hỏi hiện tại
-    currentQuestionIndex = questionIndex;
-    // Cập nhật giao diện
-    updateQuestionList();
-    showSelectedQuestion();
-}
-
-// Cập nhật danh sách câu hỏi
-function updateQuestionList() {
-    var questionList = document.getElementById('questionList');
-    questionList.innerHTML = '';
-    for (var i = 0; i < currentQuiz.length; i++) {
-        var link = document.createElement('a');
-        link.textContent = 'Câu ' + (i + 1);
-        link.href = '#';
-        link.className = currentQuestionIndex === i ? 'selected' : '';
-        link.onclick = function() { selectQuestion(i); };
-        questionList.appendChild(link);
-    }
-}
-
-// Cập nhật câu hỏi hiện tại
-    function updateCurrentQuestion() {
-    var currentQuestionDiv = document.getElementById('currentQuestion');
-    // Hiển thị câu hỏi và các câu trả lời
-}
-
-// Gọi hàm hiển thị câu hỏi được chọn (ở đầu trang)
-    showSelectedQuestion();
-
 
     function showConfirmModal(message, confirmCallback) {
         var modal = document.getElementById("confirmModal");
