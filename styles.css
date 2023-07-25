@@ -107,7 +107,7 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 20px;
+    padding: 10px; /* Giảm padding */
     border: 1px solid #888;
     width: 50%; /* Giảm chiều rộng của popup */
     max-width: 500px; /* Đặt chiều rộng tối đa cho popup */
@@ -117,7 +117,10 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-height: 500px; /* Đặt chiều cao tối đa cho popup */
+    width: auto; /* Đặt chiều rộng tự động */
 }
+
 
 .modal-content p {
     margin-bottom: 20px;
