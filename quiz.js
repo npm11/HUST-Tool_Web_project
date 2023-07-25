@@ -120,11 +120,11 @@
         // Thêm danh sách câu hỏi ở bên trái
         var questionListDiv = document.getElementById("questionList");
         questionListDiv.innerHTML = "";
-        questionListDiv.style.border = "1px solid #007BFF"; // Thay đổi màu viền
+        questionListDiv.style.border = "3px solid #007BFF"; // Thay đổi màu viền
         questionListDiv.style.padding = "10px"; // Thêm padding cho khung
-        questionListDiv.style.height = "500px"; // Đặt chiều cao cố định
+        questionListDiv.style.height = "300px"; // Đặt chiều cao cố định
         questionListDiv.style.overflow = "auto"; // Hiển thị thanh cuộn nếu cần
-        questionListDiv.style.borderRadius = "10px"; // Bo góc của khung
+        questionListDiv.style.borderRadius = "20px"; // Bo góc của khung
         questionListDiv.style.boxShadow = "0 0 10px rgba(0,0,0,0.1)"; // Thêm hiệu ứng đổ bóng
         for (var i = 0; i < currentQuiz.length; i++) {
             var questionButton = document.createElement("button");
