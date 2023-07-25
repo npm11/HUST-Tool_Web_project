@@ -201,7 +201,7 @@
         }
     
         if (unanswered) {
-            showWarningModal("Còn câu hỏi chưa được trả lời! Bạn có muốn vẫn nộp bài?", function() {
+            showWarningModal("Còn câu hỏi chưa được trả lời! Bạn vẫn muốn nộp bài?", function() {
                 // Nộp bài dù có câu chưa trả lời
                 console.log("Nộp bài dù có câu chưa trả lời");
                 localStorage.setItem('myUniqueKey', JSON.stringify({ result: result, score: score }));
