@@ -162,6 +162,6 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     background-color: #0056b3;
 }
 
-label {
-    font-weight: bold; /* In đậm các ký tự A, B, C, D */
+.answer-prefix {
+    font-weight: bold;
 }

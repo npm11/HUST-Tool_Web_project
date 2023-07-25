@@ -48,7 +48,6 @@
     function displayQuiz() {
         var quizDiv = document.getElementById("quiz");
         quizDiv.innerHTML = "";
-    
         var question = currentQuiz[currentQuestionIndex];
         var questionDiv = document.createElement("div");
         questionDiv.style.marginBottom = "20px"; // Tạo khoảng cách giữa các cụm câu hỏi-đáp án
@@ -73,9 +72,13 @@
                 if (userAnswers[currentQuestionIndex] == j) {
                     answerInput.checked = true;
                 }
+                var answerLabelPrefix = document.createElement("label");
+                answerLabelPrefix.textContent = String.fromCharCode(65 + j) + ". ";
+                answerLabelPrefix.className = "answer-prefix";
                 var answerLabel = document.createElement("label");
-                answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer; // Thêm số thứ tự cho đáp án
+                answerLabel.textContent = answer;
                 questionDiv.appendChild(answerInput);
+                questionDiv.appendChild(answerLabelPrefix);
                 questionDiv.appendChild(answerLabel);
                 questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
             }
@@ -89,9 +92,13 @@
                 if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].includes(j)) {
                     answerInput.checked = true;
                 }
+                var answerLabelPrefix = document.createElement("label");
+                answerLabelPrefix.textContent = String.fromCharCode(65 + j) + ". ";
+                answerLabelPrefix.className = "answer-prefix";
                 var answerLabel = document.createElement("label");
-                answerLabel.textContent = String.fromCharCode(65 + j) + ". " + answer; // Thêm số thứ tự cho đáp án
+                answerLabel.textContent = answer;
                 questionDiv.appendChild(answerInput);
+                questionDiv.appendChild(answerLabelPrefix);
                 questionDiv.appendChild(answerLabel);
                 questionDiv.appendChild(document.createElement("br")); // Thêm một dòng mới sau mỗi đáp án
             }
@@ -121,6 +128,7 @@
             questionListDiv.appendChild(questionButton);
         }
     }
+    
     
     function saveAnswer(index) {
         var answerInputs = document.getElementsByName("question" + index);
