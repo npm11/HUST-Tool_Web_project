@@ -120,9 +120,11 @@
         // Thêm danh sách câu hỏi ở bên trái
         var questionListDiv = document.getElementById("questionList");
         questionListDiv.innerHTML = "";
+        questionListDiv.style.border = "1px solid black"; // Thêm khung bao xung quanh
+        questionListDiv.style.padding = "10px"; // Thêm padding cho khung
         for (var i = 0; i < currentQuiz.length; i++) {
             var questionButton = document.createElement("button");
-            questionButton.textContent = "Câu " + (i + 1);
+            questionButton.textContent = (i + 1).toString(); // Hiển thị chỉ số câu hỏi thay vì "Câu " + (i + 1)
             questionButton.className = "btn btn-primary m-1";
             questionButton.onclick = function(index) {
                 return function() {
@@ -132,7 +134,8 @@
                 }
             }(i);
             questionListDiv.appendChild(questionButton);
-        }
+}
+
     }
     
     
