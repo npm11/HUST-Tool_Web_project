@@ -120,8 +120,12 @@
         // Thêm danh sách câu hỏi ở bên trái
         var questionListDiv = document.getElementById("questionList");
         questionListDiv.innerHTML = "";
-        questionListDiv.style.border = "1px solid black"; // Thêm khung bao xung quanh
+        questionListDiv.style.border = "1px solid #007BFF"; // Thay đổi màu viền
         questionListDiv.style.padding = "10px"; // Thêm padding cho khung
+        questionListDiv.style.height = "500px"; // Đặt chiều cao cố định
+        questionListDiv.style.overflow = "auto"; // Hiển thị thanh cuộn nếu cần
+        questionListDiv.style.borderRadius = "10px"; // Bo góc của khung
+        questionListDiv.style.boxShadow = "0 0 10px rgba(0,0,0,0.1)"; // Thêm hiệu ứng đổ bóng
         for (var i = 0; i < currentQuiz.length; i++) {
             var questionButton = document.createElement("button");
             questionButton.textContent = (i + 1).toString(); // Hiển thị chỉ số câu hỏi thay vì "Câu " + (i + 1)
@@ -134,12 +138,8 @@
                 }
             }(i);
             questionListDiv.appendChild(questionButton);
-}
-
-    }
-    
-    
-    
+        }
+    }  
     function saveAnswer(index) {
         var answerInputs = document.getElementsByName("question" + index);
         if (currentQuiz[index].type === "multiple_choice") {
