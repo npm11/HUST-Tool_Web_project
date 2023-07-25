@@ -164,4 +164,5 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
 
 .answer-prefix {
     font-weight: bold;
+    margin-right: 10px;
 }
