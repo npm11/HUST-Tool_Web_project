@@ -1,7 +1,3 @@
-#quiz {
-    margin: 0 auto;
-    width: 60%;
-}
 
 .dropdown {
     position: relative;
@@ -129,4 +125,26 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+
+#questionList {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 20%;
+    height: 100%;
+    overflow: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#questionList li {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#questionList li:hover {
+    background-color: #ddd;
 }
