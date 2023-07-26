@@ -202,3 +202,15 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     font-size: 20px;
     font-weight: bold;
 }
+#countdown {
+  display: flex;
+  justify-content: center;
+  font-size: 1.3em;
+  color: #333;
+  background-color: rgba(128, 128, 128, 0.5); /* Màu xám trong suốt */
+  border-radius: 8px; /* Bo góc tròn */
+  padding: 7px;
+  position:     relative   ; /* Đặt đồng hồ đếm ngược tương đối so với vị trí hiện tại */
+  left: 100px;  /* Đặt đồng hồ đếm ngược gần nút submit */
+  top: 0x; /* Đặt đồng hồ đếm ngược gần nút submit */
+}
