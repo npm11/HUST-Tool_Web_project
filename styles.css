@@ -175,16 +175,13 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     box-sizing: border-box; /* Đảm bảo padding và border không làm tăng chiều rộng của container */
 }
 
-.submit-button-container button {
-    width: 118px;
-    height: 43px;
-    align-self: flex-end;
-}
+
 #questionList {
     max-height: none;
     overflow-y: visible;
 }
 .row {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -195,18 +192,13 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     align-items: center;
 }
 .countdown {
-    margin-right: 20px;
     font-size: 10px;
     font-weight: bold;
 }
 #countdown {
-  display: flex;
-  justify-content: center;
-  font-size: 1.3em;
-  color: #333;
-  background-color: rgba(128, 128, 128, 0.5); /* Màu xám trong suốt */
-  border-radius: 8px; /* Bo góc tròn */
-  padding: 7px;
-  left: 100px;  /* Đặt đồng hồ đếm ngược gần nút submit */
-  top: 0x; /* Đặt đồng hồ đếm ngược gần nút submit */
+    font-size: 1.3em;
+    color: #333;
+    background-color: rgba(128, 128, 128, 0.5);
+    border-radius: 8px;
+    padding: 7px;
 }
