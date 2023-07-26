@@ -169,15 +169,12 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
 .submit-button-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch; /* Đảm bảo tất cả các phần tử con có chiều cao bằng nhau */
     padding: 10px;
     max-width: 100%; /* Giới hạn chiều rộng của container */
     box-sizing: border-box; /* Đảm bảo padding và border không làm tăng chiều rộng của container */
-    gap: 7px; /* Thêm khoảng cách giữa các phần tử con */
+    gap: 20px; /* Thêm khoảng cách giữa các phần tử con */
 }
-
-
-
 #questionList {
     max-height: none;
     overflow-y: visible;
@@ -198,9 +195,15 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     font-weight: bold;
 }
 #countdown {
-    font-size: 1.3em;
+    font-size: 1em; /* Đặt kích thước font cho đồng hồ */
     color: #333;
     background-color: rgba(128, 128, 128, 0.5);
     border-radius: 8px;
     padding: 7px;
+    display: flex; /* Đảm bảo đồng hồ được căn giữa */
+    align-items: center; /* Đảm bảo đồng hồ được căn giữa */
+    justify-content: center; /* Đảm bảo đồng hồ được căn giữa */
+}
+.btn {
+    font-size: 1em; /* Đặt kích thước font cho nút submit */
 }
