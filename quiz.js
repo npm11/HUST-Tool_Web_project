@@ -49,7 +49,34 @@
         userAnswers = new Array(currentQuiz.length).fill(null); // Khởi tạo userAnswers sau khi currentQuiz đã được khởi tạo
         displayQuiz();
     }
+    var time = 120 * 60;
 
+    function startCountdown() {
+        var countdownElement = document.getElementById('countdown');
+
+        var interval = setInterval(function() {
+            var hours = Math.floor(time / 3600);
+            var minutes = Math.floor((time % 3600) / 60);
+            var seconds = time % 60;
+
+            countdownElement.textContent = 
+                (hours < 10 ? '0' + hours : hours) + ':' +
+                (minutes < 10 ? '0' + minutes : minutes) + ':' +
+                (seconds < 10 ? '0' + seconds : seconds);
+
+            time--;
+
+            if (time < 0) {
+                clearInterval(interval);
+                // Thực hiện hành động khi hết thời gian, ví dụ: tự động nộp bài
+                // submitQuiz();
+            }
+        }, 1000);
+    }
+
+    // Bắt đầu đếm ngược khi trang web tải xong
+    window.onload = startCountdown;
+    // Kết thúc đoạn mã đếm ngược thời gian
     function displayQuiz() {
         var quizDiv = document.getElementById("quiz");
         quizDiv.innerHTML = "";
@@ -248,7 +275,6 @@
     window.displayQuiz = displayQuiz;
     window.submitQuiz = submitQuiz;
 })();
-
 
 
 
