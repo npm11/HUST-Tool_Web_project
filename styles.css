@@ -166,6 +166,11 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     font-weight: bold;
     margin-right: 10px;
 }
+.submit-button-container {
+    width: 56%;
+    display:  table-row-group  ;
+    justify-content:  flex-end;
+}
 
 .submit-button-container button {
     width: 118px;
@@ -191,8 +196,4 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.submit-button-container {
-    position: sticky; /* Đặt vị trí của khung chứa là sticky */
-    bottom: 0; /* Cố định khung chứa ở dưới cùng */
 }

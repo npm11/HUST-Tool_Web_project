@@ -43,16 +43,15 @@
     <h1 class="text-center">Quiz</h1>
     <div class="container">
         <div class="row">
-            <div id="questionList" class="col-12 col-md-4">
-                <div class="submit-button-container"> <!-- Di chuyển khung chứa nút Submit vào trong khung chứa danh sách câu hỏi -->
-                    <button type="submit" form="quiz" class="btn btn-primary mt-3">Submit Quiz</button>
-                </div>
-            </div>
+            <div id="questionList" class="col-12 col-md-4"></div>
             <div class="col-12 col-md-8">
                 <form id="quiz" onsubmit="event.preventDefault(); submitQuiz();"></form>
             </div>
         </div>
-    </div>       
+        <div class="submit-button-container"> <!-- Tạo một khung chứa cho nút Submit -->
+            <button type="submit" form="quiz" class="btn btn-primary mt-3">Submit Quiz</button>
+        </div>
+    </div>    
     <script src="quiz.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
