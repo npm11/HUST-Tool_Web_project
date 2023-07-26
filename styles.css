@@ -167,9 +167,9 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     margin-right: 10px;
 }
 .submit-button-container {
-    width: 56%;
-    display:  table-row-group  ;
-    justify-content:  flex-end;
+    position: relative;
+    bottom: 20px;
+    
 }
 
 .submit-button-container button {
