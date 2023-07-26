@@ -173,7 +173,9 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     padding: 10px;
     max-width: 100%; /* Giới hạn chiều rộng của container */
     box-sizing: border-box; /* Đảm bảo padding và border không làm tăng chiều rộng của container */
+    gap: 7px; /* Thêm khoảng cách giữa các phần tử con */
 }
+
 
 
 #questionList {
