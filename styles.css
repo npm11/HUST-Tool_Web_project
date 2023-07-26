@@ -167,14 +167,14 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     margin-right: 10px;
 }
 .submit-button-container {
-    position: relative;
-    top: 400px;
-    right: 630px;
+    width: 56%;
+    display:  table-row-group  ;
+    justify-content:  flex-end;
 }
 
 .submit-button-container button {
-    width: 119px;
-    height: 45px;
+    width: 118px;
+    height: 43px;
     align-self: flex-end;
 }
 #questionList {
