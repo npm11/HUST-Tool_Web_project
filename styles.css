@@ -1,6 +1,6 @@
 #quiz {
-    margin: 20px;
-    width: 98%;
+    max-height: none;
+    overflow-y: visible;
 }
 
 .dropdown {
@@ -71,7 +71,7 @@ h1 {
 
 input[type="radio"], input[type="checkbox"] {
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 10px; /* Thêm khoảng cách giữa checkbox và câu trả lời */
 }
 
 input[type="radio"]:focus, input[type="checkbox"]:focus {
@@ -110,12 +110,12 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 10px;
+    padding: 10px; /* Giảm padding */
     border: 1px solid #888;
-    width: 270px;
-    border-radius: 10px;
-    text-align: center;
-    height: 160px;
+    width: 270px; /* Đặt chiều rộng cố định */
+    border-radius: 10px; /* Làm tròn góc của popup */
+    text-align: center; /* Căn giữa nội dung */
+    height: 160px; /* Đặt chiều cao cố định */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -145,6 +145,7 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     cursor: pointer;
 }
 
+/* Thêm một số phong cách cho nút trong popup */
 .modal-content button {
     margin-top: 0px;
     padding: 10px;
@@ -154,7 +155,7 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 40%;
+    width: 40%; /* Đặt chiều rộng cho các nút */
 }
 
 .modal-content button:hover {
@@ -165,9 +166,9 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     font-weight: bold;
     margin-right: 10px;
 }
-
 .submit-button-container {
-    align-self: flex-start;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .submit-button-container button {
@@ -175,7 +176,6 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     height: 43px;
     align-self: flex-end;
 }
-
 #questionList {
     border: 2px solid black;
     border-radius: 10px;
@@ -184,16 +184,13 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
     min-height: 400px;
     max-height: 400px;
     overflow-y: auto;
-    margin-bottom: 10px;
 }
-
 .row {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
 }
-
 .container {
     display: flex;
     flex-direction: column;
