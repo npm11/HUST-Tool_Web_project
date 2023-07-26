@@ -151,6 +151,13 @@
             e.preventDefault();
             $(this).next('.submenu').toggle();
         });
+
+        // Hide submenu when click outside
+        $(document).click(function(e) {
+            if (!$(e.target).closest('.has-submenu').length) {
+                $('.submenu').hide();
+            }
+        });
     </script>
 </body>
 </html>
