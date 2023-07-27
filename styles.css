@@ -207,3 +207,9 @@ input[type="radio"]:hover, input[type="checkbox"]:hover {
 .btn {
     font-size: 1em; /* Đặt kích thước font cho nút submit */
 }
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
