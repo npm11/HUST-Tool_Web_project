@@ -21,8 +21,8 @@ a {
 }
 
 a:hover {
-	color: #FC3;
-    text-decoration: none;
+	color: #ffbf00;
+	text-decoration: none;
 }
 
 ul {
@@ -69,9 +69,9 @@ p {
 /* Buttons */
 
 .main-button a {
+    border-radius: 10px;
     background-color: #d1061b;
     color: #fff;
-    border-radius: 10px;
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -166,7 +166,7 @@ a.menu-link { display: none; }
 }
 
 .main-header {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     height: 80px;
     position: fixed;
     z-index: 12;
@@ -209,12 +209,13 @@ a.menu-link { display: none; }
 
 .main-menu li a {
     padding: 10px 15px;
-    font-size: 15px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 700;
     color: #000;
     border: 2px solid transparent;
+    transition: all 0.5s;
 }
 
 .main-menu li.has-submenu a:after {
@@ -230,7 +231,7 @@ a.menu-link { display: none; }
 .main-menu li .sub-menu {
     position: absolute;
     width: 160px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     opacity: 0;
     visibility: hidden;
     transition: all 0.5s;
@@ -265,17 +266,16 @@ a.menu-link { display: none; }
     padding: 0px 15px;
     letter-spacing: 0.5px;
     border: none;
-    transition: all 0.5s;
 }
 
 .main-menu li .sub-menu li a:hover {
-    color: #d1061b;
+    color: #f5a425;
     border: none;
 }
 
 .main-nav li:hover a,
 .main-nav li.active a {
-    border: 3px solid #f4c409;
+    border: 2px solid #f5a425;
 }
 
 @media (max-width: 950px) {
