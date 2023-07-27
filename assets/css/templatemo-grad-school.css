@@ -232,7 +232,7 @@ a.menu-link { display: none; }
 .main-menu li .sub-menu {
     position: absolute;
     width: 160px;
-    background-color: #ffffff;
+    background-color: #f2c208;
     opacity: 0;
     visibility: hidden;
     transition: all 0.5s;
@@ -249,7 +249,7 @@ a.menu-link { display: none; }
     margin-left: 0px;
     margin-bottom: 15px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #d1061b;
+    border-bottom: 2px solid #ffffff;
 }
 
 .main-menu li .sub-menu li:first-child {
@@ -270,13 +270,13 @@ a.menu-link { display: none; }
 }
 
 .main-menu li .sub-menu li a:hover {
-    color: #f5a425;
+    color: #d1061b;
     border: none;
 }
 
 .main-nav li:hover a,
 .main-nav li.active a {
-    border: 2px solid #f5a425;
+    border: 2.5px solid #f5a425;
 }
 
 @media (max-width: 950px) {
