@@ -166,7 +166,7 @@ a.menu-link { display: none; }
 }
 
 .main-header {
-    background-color: #ffffff;
+    background-color: #d1061b;
     height: 80px;
     position: fixed;
     z-index: 12;
@@ -402,7 +402,7 @@ section.features .col-4 {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #F4C409;
+  background-color: #f2c208;
   color: #fff;
   padding: 40px;
 }
