@@ -71,6 +71,7 @@ p {
 .main-button a {
     background-color: #d1061b;
     color: #fff;
+    border-radius: 10px;
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -165,7 +166,7 @@ a.menu-link { display: none; }
 }
 
 .main-header {
-    background-color: #3576dc;
+    background-color: #FFFFFF;
     height: 80px;
     position: fixed;
     z-index: 12;
@@ -208,13 +209,12 @@ a.menu-link { display: none; }
 
 .main-menu li a {
     padding: 10px 15px;
-    font-size: 13px;
+    font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 700;
-    color: #fff;
+    color: #000;
     border: 2px solid transparent;
-    transition: all 0.5s;
 }
 
 .main-menu li.has-submenu a:after {
@@ -230,7 +230,7 @@ a.menu-link { display: none; }
 .main-menu li .sub-menu {
     position: absolute;
     width: 160px;
-    background-color: #ff7907;
+    background-color: #FFFFFF;
     opacity: 0;
     visibility: hidden;
     transition: all 0.5s;
@@ -247,7 +247,7 @@ a.menu-link { display: none; }
     margin-left: 0px;
     margin-bottom: 15px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #d1061b;
+    border-bottom: 2px solid #d1061b;
 }
 
 .main-menu li .sub-menu li:first-child {
@@ -260,7 +260,7 @@ a.menu-link { display: none; }
 }
 
 .main-menu li .sub-menu li a {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     padding: 0px 15px;
     letter-spacing: 0.5px;
@@ -269,13 +269,13 @@ a.menu-link { display: none; }
 }
 
 .main-menu li .sub-menu li a:hover {
-    color: #f5a425;
+    color: #d1061b;
     border: none;
 }
 
 .main-nav li:hover a,
 .main-nav li.active a {
-    border: 2px solid #f5a425;
+    border: 3px solid #f4c409;
 }
 
 @media (max-width: 950px) {
