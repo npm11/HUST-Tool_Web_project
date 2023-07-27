@@ -167,7 +167,7 @@ a.menu-link { display: none; }
 
 .main-header {
     background-image: linear-gradient(to bottom, rgb(209 6 27), rgb(209 6 27 / 0%)); 
-    height: 250px;
+    height: 223px;
     position: fixed;
     z-index: 12;
     width: 100%;
