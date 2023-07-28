@@ -199,8 +199,8 @@
     // Get the video from the webpage
     var video = document.getElementById('bg-video');
 
-    // Ensure the video has loaded before changing the start time
-    video.oncanplaythrough = function() {
+    // Ensure the video's metadata has loaded before changing the start time
+    video.onloadedmetadata = function() {
         // Check if the webpage is being viewed on a mobile device
         if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             // If true, set the start time of the video to 5 seconds
