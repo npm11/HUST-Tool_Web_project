@@ -59,7 +59,39 @@
         .has-submenu:hover .submenu {
          display: block;
         }
+        @media screen and (max-width: 768px) {
+  .main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
 
+  .main-nav.show {
+    transform: translateX(0);
+  }
+
+  .main-menu {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .main-menu li {
+    margin: 20px 0;
+  }
+
+  .main-menu li a {
+    color: white;
+    font-size: 24px;
+  }
+}
     </style>
   </head>
 
@@ -96,7 +128,7 @@
 
       <div class="video-overlay header-text">
         <div class="caption" style="padding-bottom: 97px;">
-          <h6>Chào mừng đến với ứng dụng thi trắc nghiệm</h6>
+          <h6>Chào mừng đến với ứng dụng thi thử HUST EXAM</h6>
           <h2 style="font-size: 50px;"><em>Thi</em> thử ngay</h2>
           <div class="main-button">
               <a href="https://www.facebook.com/manhphngz/">Bắt đầu</a>
@@ -262,8 +294,14 @@
         $(document).click(function(e) {
             if (!$(e.target).closest('.has-submenu').length || $(e.target).closest('.submenu').length) {
                  $('.submenu').hide();
-    }
-});
+            }
+        });
+
+        // Code mới thêm vào
+        document.querySelector('.menu-link').addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector('#menu').classList.toggle('show');
+        });
 
     </script>
 </body>
