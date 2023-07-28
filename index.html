@@ -248,19 +248,23 @@
         $(window).scroll(function () {
           checkSection();
         });
-    // Handle click event for "Thi thử" button
-    $('.has-submenu > a').click(function (e) {
-        e.stopPropagation(); // Prevent this event from bubbling up to document
-        $('.submenu').not($(this).next('.submenu')).hide(); // Hide other submenus
-        $(this).next('.submenu').toggle();
-    });
 
-    // Hide submenu when click outside
-    $(document).click(function (e) {
-        if (!$(e.target).closest('.has-submenu').length) {
-            $('.submenu').hide();
-        }
-    });
+        // Handle click event for "Thi thử" button
+        $('.has-submenu > a').click(function(e) {
+            $('.has-submenu > a').click(function(e) {
+        $(this).next('.submenu').toggle();
+        });
+
+            $(this).next('.submenu').toggle();
+        });
+
+        // Hide submenu when click outside
+        $(document).click(function(e) {
+            if (!$(e.target).closest('.has-submenu').length || $(e.target).closest('.submenu').length) {
+                 $('.submenu').hide();
+    }
+});
+
     </script>
 </body>
 </html>
