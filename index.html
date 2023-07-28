@@ -88,25 +88,13 @@
     </nav>
   </header>
 
-<!-- ***** Main Banner Area Start ***** -->
-<section class="section main-banner" id="top" data-section="section1">
-    <div id="bg-video-desktop">
-        <video autoplay muted loop id="bg-video-desktop">
-            <source src="assets/images/videotest.mp4" type="video/mp4" />
-        </video>
-    </div>
-    <div id="bg-video-mobile">
-        <video autoplay muted loop id="bg-video-mobile">
-            <source src="assets/images/mobilevideo.mp4" type="video/mp4" />
-        </video>
-    </div>
+  <!-- ***** Main Banner Area Start ***** -->
+  <section class="section main-banner" id="top" data-section="section1">
+      <video autoplay muted loop id="bg-video">
+          <source src="assets/images/videotest.mp4" type="video/mp4" />
+      </video>
 
-    <div class="video-overlay header-text">
-        <!-- The rest of your HTML code -->
-    </div>
-</section>
-<!-- ***** Main Banner Area End ***** -->
-
+      <div class="video-overlay header-text">
         <div class="caption" style="padding-bottom: 97px;">
           <h6>Chào mừng đến với ứng dụng thi trắc nghiệm</h6>
           <h2 style="font-size: 50px;"><em>Thi</em> thử ngay</h2>
@@ -208,20 +196,6 @@
     <script src="assets/js/slick-slider.js"></script>
     <script src="assets/js/custom.js"></script>
     <script>
-    // Get the video from the webpage
-    var video = document.getElementById('bg-video');
-
-    // Ensure the video's metadata has loaded before changing the start time
-    video.onloadedmetadata = function() {
-        // Check if the webpage is being viewed on a mobile device
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            // If true, set the start time of the video to 5 seconds
-            video.currentTime = 5;
-
-            // Start playing the video
-            video.play();
-        }
-    };
         //according to loftblog tut
         $('.nav li:first').addClass('active');
 

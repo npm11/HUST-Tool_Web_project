@@ -279,29 +279,13 @@ a.menu-link { display: none; }
     border: 2px solid #f5a425;
 }
 
-#bg-video-desktop {
-  display: block;
-}
-
-#bg-video-mobile {
-  display: none;
-}
-
 @media (max-width: 950px) {
   .main-nav li:hover a,
   .main-nav li.active a {
     border: 2px solid transparent;
     border-bottom: 1px solid rgba(250,250,250,0.25);
   }
-
-  #bg-video-desktop {
-    display: none;
-  }
-  #bg-video-mobile {
-    display: block;
-  }
 }
-
 
 
 /* Slider */
