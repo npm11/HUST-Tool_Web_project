@@ -188,7 +188,6 @@
   <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
     <script src="assets/js/isotope.min.js"></script>
     <script src="assets/js/owl-carousel.js"></script>
     <script src="assets/js/lightbox.js"></script>
@@ -197,6 +196,22 @@
     <script src="assets/js/slick-slider.js"></script>
     <script src="assets/js/custom.js"></script>
     <script>
+         window.onload = function() {
+            // Check if the webpage is being viewed on a mobile device
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                // If true, get the video from the webpage
+                var video = document.getElementById('bg-video');
+
+                // Ensure the video has loaded before changing the start time
+                video.oncanplaythrough = function() {
+                    // Set the start time of the video to 5 seconds
+                    video.currentTime = 5;
+
+                    // Start playing the video
+                    video.play();
+                };
+            }
+        };
         //according to loftblog tut
         $('.nav li:first').addClass('active');
 
