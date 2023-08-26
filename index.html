@@ -38,39 +38,7 @@
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
-<style>
-  /* ... (các đoạn mã CSS hiện tại của bạn) ... */
 
-  /* Modal */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-  }
-
-  .modal-content {
-    position: relative;
-    margin: auto;
-    padding: 20px;
-    width: 50%;
-  }
-
-  .close {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-</style>
 
 </head>
     <style>
@@ -92,6 +60,38 @@
         .has-submenu:hover .submenu {
          display: block;
         }
+        /* ... (các đoạn mã CSS hiện tại của bạn) ... */
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  position: relative;
+  margin: auto;
+  padding: 20px;
+  width: 50%;
+}
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
     </style>
   </head>
 
@@ -202,6 +202,12 @@
       </div>
     </div>
   </section>
+  <div id="qrModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="QRcode.jpg" alt="QR Code">
+    </div>
+  </div>
   <footer>
     <div class="container">
       <div class="row">
@@ -297,43 +303,30 @@
                  $('.submenu').hide();
             }
         });
-    </script>
-    <script>
-      // ... (các đoạn mã JavaScript hiện tại của bạn) ...
-    
-      // Get the modal
-      var modal = document.getElementById("qrModal");
-    
-      // Get the button that opens the modal
-      var btn = document.getElementById("donateBtn");
-    
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-    
-      // When the user clicks the button, open the modal 
-      btn.onclick = function() {
-        modal.style.display = "block";
-      }
-    
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function() {
-        modal.style.display = "none";
-      }
-    
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      }
-    </script>
-    <!-- Modal -->
-<div id="qrModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <img src="QRcode.jpg" alt="QR Code">
-  </div>
-</div>
+        var modal = document.getElementById("qrModal");
 
+// Get the button that opens the modal
+var btn = document.getElementById("donateBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+    </script>
 </body>
 </html>
