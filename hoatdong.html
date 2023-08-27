@@ -37,26 +37,29 @@
         }
 
         $(document).ready(function() {
-            var activitiesRef = firebase.database().ref('activities');
-            activitiesRef.on('value', function(snapshot) {
-                var data = snapshot.val();
-                $("#activityList").empty();
-                data.forEach(function(activity) {
-                    $("#activityList").append(
-                        `<div class="col-md-4">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">${activity.ActivityName}</h5>
-                                    <p class="card-text">ID: ${activity.ActivityID}</p>
-                                    <p class="card-text">Start Date: ${formatDate(activity.StartTime)}</p>
-                                    <p class="card-text">Finish Date: ${formatDate(activity.FinishTime)}</p>
-                                </div>
-                            </div>
-                        </div>`
-                    );
-                });
-            });
+    var activitiesRef = firebase.database().ref('activities');
+    activitiesRef.on('value', function(snapshot) {
+        var data = snapshot.val();
+        // Sắp xếp dữ liệu theo ActivityID từ lớn đến nhỏ
+        data.sort((a, b) => b.ActivityID - a.ActivityID);
+        
+        $("#activityList").empty();
+        data.forEach(function(activity) {
+            $("#activityList").append(
+                `<div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">${activity.ActivityName}</h5>
+                            <p class="card-text">ID: ${activity.ActivityID}</p>
+                            <p class="card-text">Start Date: ${formatDate(activity.StartTime)}</p>
+                            <p class="card-text">Finish Date: ${formatDate(activity.FinishTime)}</p>
+                        </div>
+                    </div>
+                </div>`
+            );
         });
+    });
+});
     </script>
 </body>
 </html>
