@@ -1,10 +1,18 @@
 from flask import Flask, jsonify
-from flask_cors import CORS  # Thêm dòng này
+from flask_cors import CORS
 import requests
 import json
+import firebase_admin
+from firebase_admin import credentials, db
+
+# Khởi tạo Firebase
+cred = credentials.Certificate("D:\npmdz.json")
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://husttools-default-rtdb.firebaseio.com/'
+})
 
 app = Flask(__name__)
-CORS(app)  # Thêm dòng này
+CORS(app)
 
 # Biến toàn cục để lưu dữ liệu
 cached_data = None
@@ -15,24 +23,27 @@ def get_activities():
     if cached_data is None:
         # Tải dữ liệu và lưu vào biến cached_data
         cached_data = fetch_data_from_source()
+        # Lưu dữ liệu vào Firebase
+        db.reference('activities').set(cached_data)
     return jsonify(cached_data)
 
 def fetch_data_from_source():
-    # Hàm này thực hiện việc tải dữ liệu từ nguồn gốc
     activities = []
-    start_checking_from_id = 8720  # Bắt đầu kiểm tra từ ID này
+    start_checking_from_id = 8720
     largest_id = find_largest_activity_id(start_checking_from_id)
     if largest_id is not None:
         for activity_id in range(start_checking_from_id, largest_id + 1):
             activity_data = check_activity(activity_id)
             if activity_data:
                 activities.append(activity_data)
+        # Lưu dữ liệu vào Firebase
+        db.reference('activities').set(activities)
     return activities
 
 def check_activity(activity_id):
     url = "https://ctsv.hust.edu.vn/api-t/Activity/GetActivityById"
     headers = {
-        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkZNU3BaNmFOa1JBOXN5ZzJLNl9HMlhUdzZLQSIsImtpZCI6IkZNU3BaNmFOa1JBOXN5ZzJLNl9HMlhUdzZLQSJ9.eyJhdWQiOiJodHRwczovL2N0c3YuaHVzdC5lZHUudm4iLCJpc3MiOiJodHRwczovL2Fzc28uaHVzdC5lZHUudm4vYWRmcyIsImlhdCI6MTY5MzExNjE3NCwiZXhwIjoxNjkzMTE5Nzc0LCJhdXRoX3RpbWUiOjE2OTMxMTYxNzQsIm5vbmNlIjoiYzRiMjk2NmUtNDU2MS00OWE2LTgxYmEtMmMxM2NkNmYxMmY0Iiwic3ViIjoiSnVEc09RV09RWDhiSWVwcklNMGI2dlo1NGg4S1pnemRFbXdsY2RBMjVwMD0iLCJ1cG4iOiJtYW5oLm5wMjE1MDg3QHNpcy5odXN0LmVkdS52biIsInVuaXF1ZV9uYW1lIjoiSFVTVFxcTWFuaC5OUDIxNTA4NyIsInB3ZF91cmwiOiJodHRwczovL2Fzc28uaHVzdC5lZHUudm4vYWRmcy9wb3J0YWwvdXBkYXRlcGFzc3dvcmQvIiwic2lkIjoiUy0xLTUtMjEtMjc0NjI1MTAwNy0xMzI0NTk1MjA2LTc4MTY1NDM1MS04ODA4MiJ9.oK6zcAXaqra2skh-Y4q7-Xbf2jkkCaMwpkFpf0-evx3fpvgWcpSN1C5cVCxYW74ovgmqK6uAGtBVwneav1Dw6F0HFhLZdNE8Y6hYiuhIrwweJJCp301OT9wL4MdsTjRQWR438hgqb7bxmcLzjDE8SEcmIE7NA2l8gOlRF2TsFac5DwlKaNtZSw5PP3viiBHyWpopKVgVQzkTUutTpwkJspBgiGpTVs26cD9BjE9yNABcF26d_mEN5JiDx4cogiPmH-2_furalXyl3-xQxgmAanK_RHCUn207oE3z6P9TqEuYddGqZEZ_TTaoQYO-xZCEGsyeLzcizZSsuiObR1BuXw",  # Thay thế <Your-Token-Here> với token của bạn
+        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkZNU3BaNmFOa1JBOXN5ZzJLNl9HMlhUdzZLQSIsImtpZCI6IkZNU3BaNmFOa1JBOXN5ZzJLNl9HMlhUdzZLQSJ9.eyJhdWQiOiJodHRwczovL2N0c3YuaHVzdC5lZHUudm4iLCJpc3MiOiJodHRwczovL2Fzc28uaHVzdC5lZHUudm4vYWRmcyIsImlhdCI6MTY5MzEyMDE1MiwiZXhwIjoxNjkzMTIzNzUyLCJhdXRoX3RpbWUiOjE2OTMxMTYxNzQsIm5vbmNlIjoiYzE1Zjk4MzAtZGM4YS00ZmU3LWI0NmEtZjlkMzA1M2NmYzFmIiwic3ViIjoiSnVEc09RV09RWDhiSWVwcklNMGI2dlo1NGg4S1pnemRFbXdsY2RBMjVwMD0iLCJ1cG4iOiJtYW5oLm5wMjE1MDg3QHNpcy5odXN0LmVkdS52biIsInVuaXF1ZV9uYW1lIjoiSFVTVFxcTWFuaC5OUDIxNTA4NyIsInB3ZF91cmwiOiJodHRwczovL2Fzc28uaHVzdC5lZHUudm4vYWRmcy9wb3J0YWwvdXBkYXRlcGFzc3dvcmQvIiwic2lkIjoiUy0xLTUtMjEtMjc0NjI1MTAwNy0xMzI0NTk1MjA2LTc4MTY1NDM1MS04ODA4MiJ9.QAaic4XBzUo-lIg4j9_uU_wxAThxHwKsC1yEoukju0r_ZXDsGqf56hL3xClhTI-uRaSet4Yg_05aQo1jgEFenfea1iO4ccI5zHTqvtMM13CmHE0k3pztg9D-cCnx87FGTuQcft8ILcUuCx4ihcHVb80qLB5PCDMeqY6MwvRTNd6kHzlWuLbzJflewObdIDCqNtLzll6i0b6wUobQrII4rIEywhh8TcklidkvvORK9mJ3vNZhvPBjiYmeaWh7L3EPsnseNt-DxJar3nyFcjBMILJ2_p3Se8QyLRBZtkU9eMR3r3VBy2U0IH5n1KTTHyWPlBDU6Bzs8smd_RZKKWsvdw",  # Thay thế <Your-Token-Here> với token của bạn
         "Content-Type": "application/json",
     }
     payload = json.dumps({"Aid": activity_id})
@@ -51,7 +62,7 @@ def find_largest_activity_id(start_id):
     largest_id = None
     activity_id = start_id
     gap_count = 0
-    while gap_count < 100:
+    while gap_count < 50:
         if check_activity(activity_id):
             largest_id = activity_id
             gap_count = 0

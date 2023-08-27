@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hoạt Động</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Thêm thư viện Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
 </head>
 <body>
     <h1>Danh sách hoạt động</h1>
@@ -21,8 +24,24 @@
     </table>
 
     <script>
+        // Khởi tạo Firebase
+        var firebaseConfig = {
+            apiKey: "AIzaSyBp6IG5Za_idPrJ485nf2kD4oi1G-XgrCs",
+            authDomain: "husttools.firebaseapp.com",
+            databaseURL: "https://husttools-default-rtdb.firebaseio.com",
+            projectId: "husttools",
+            storageBucket: "husttools.appspot.com",
+            messagingSenderId: "424219374947",
+            appId: "1:424219374947:web:41de76cd8390edc94fcf56",
+            measurementId: "G-CWT9EQ05RN"
+        };
+        firebase.initializeApp(firebaseConfig);
+
         $(document).ready(function() {
-            $.get("http://localhost:5000/get_activities", function(data) {
+            var activitiesRef = firebase.database().ref('activities');
+            activitiesRef.on('value', function(snapshot) {
+                var data = snapshot.val();
+                $("#activityTable tbody").empty();
                 data.forEach(function(activity) {
                     $("#activityTable tbody").append(
                         `<tr><td>${activity.ActivityID}</td><td>${activity.ActivityName}</td></tr>`
