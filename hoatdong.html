@@ -45,6 +45,7 @@
         
         $("#activityList").empty();
         data.forEach(function(activity) {
+            var activityLink = `https://ctsv.hust.edu.vn/#/hoat-dong/${activity.ActivityID}/chi-tiet`;
             $("#activityList").append(
                 `<div class="col-md-4">
                     <div class="card mb-4">
@@ -53,6 +54,7 @@
                             <p class="card-text">ID: ${activity.ActivityID}</p>
                             <p class="card-text">Start Date: ${formatDate(activity.StartTime)}</p>
                             <p class="card-text">Finish Date: ${formatDate(activity.FinishTime)}</p>
+                            <a href="${activityLink}" target="_blank" class="btn btn-primary">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>`
