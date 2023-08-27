@@ -1,1 +1,35 @@
-<html><body><table><tr><th>Activity ID</th><th>Activity Name</th></tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoạt Động</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Danh sách hoạt động</h1>
+    <table id="activityTable">
+        <thead>
+            <tr>
+                <th>Activity ID</th>
+                <th>Activity Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            $.get("http://localhost:5000/get_activities", function(data) {
+                data.forEach(function(activity) {
+                    $("#activityTable tbody").append(
+                        `<tr><td>${activity.ActivityID}</td><td>${activity.ActivityName}</td></tr>`
+                    );
+                });
+            });
+        });
+    </script>
+</body>
+</html>
