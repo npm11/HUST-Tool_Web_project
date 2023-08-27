@@ -4,26 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hoạt Động</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Thêm thư viện Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
 </head>
 <body>
-    <h1>Danh sách hoạt động</h1>
-    <table id="activityTable">
-        <thead>
-            <tr>
-                <th>Activity ID</th>
-                <th>Activity Name</th>
-                <th>Start Date</th>
-                <th>Finish Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
-        </tbody>
-    </table>
+    <div class="container">
+        <h1 class="text-center mt-4 mb-4">Danh sách hoạt động</h1>
+        <div id="activityList" class="row">
+            <!-- Các card hoạt động sẽ được thêm vào đây bằng JavaScript -->
+        </div>
+    </div>
 
     <script>
         // Khởi tạo Firebase
@@ -48,15 +40,19 @@
             var activitiesRef = firebase.database().ref('activities');
             activitiesRef.on('value', function(snapshot) {
                 var data = snapshot.val();
-                $("#activityTable tbody").empty();
+                $("#activityList").empty();
                 data.forEach(function(activity) {
-                    $("#activityTable tbody").append(
-                        `<tr>
-                            <td>${activity.ActivityID}</td>
-                            <td>${activity.ActivityName}</td>
-                            <td>${formatDate(activity.StartTime)}</td>
-                            <td>${formatDate(activity.FinishTime)}</td>
-                        </tr>`
+                    $("#activityList").append(
+                        `<div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">${activity.ActivityName}</h5>
+                                    <p class="card-text">ID: ${activity.ActivityID}</p>
+                                    <p class="card-text">Start Date: ${formatDate(activity.StartTime)}</p>
+                                    <p class="card-text">Finish Date: ${formatDate(activity.FinishTime)}</p>
+                                </div>
+                            </div>
+                        </div>`
                     );
                 });
             });
