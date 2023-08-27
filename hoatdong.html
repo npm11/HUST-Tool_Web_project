@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="js"> <!-- Thêm class "js" vào đây -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="assets/css/styleindex.css">
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
-
     <!-- Your additional styles here -->
     <style>
         /* Thêm khoảng cách ở đầu trang */
@@ -158,6 +158,14 @@
         });
     });
 });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $(".menu-link").click(function(e) {
+                e.preventDefault();
+                $("#menu").toggleClass("active");
+            });
+        });
     </script>
 </body>
 </html>
