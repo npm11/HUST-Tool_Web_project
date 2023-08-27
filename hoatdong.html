@@ -16,13 +16,29 @@
     <style>
         /* Thêm khoảng cách ở đầu trang */
         body {
-            padding-top: 80px;  /* Điều chỉnh khoảng cách tùy ý */
+            padding-top: 160px;  /* Điều chỉnh khoảng cách tùy ý */
         }
+        .card-title.ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            height: 1.5em;  /* Cố định chiều cao */
+        }
+        .hoatdong-header {
+        background-image: none;  /* Loại bỏ gradient */
+        background-color: rgb(209, 6, 27);  /* Đặt màu nền */
+    }
+    .main-menu {
+    float: right;
+    padding-right: 70px;
+  padding-top: 5px;
+}
     </style>
 </head>
 <body>
     <!-- Copy the header from your homepage -->
-    <header class="main-header clearfix" role="header" style="position: fixed; width: 100%; top: 0; z-index: 1000;">
+    <header class="main-header hoatdong-header clearfix" role="header" style="position: fixed; width: 100%; top: 0; z-index: 1000;">
         <div class="logo">
             <a href="#" style="display: flex; align-items: center;"><img style="height: 58.4615384615px; width: 40px; margin-right: 13px;" alt="Logo" src="https://hust.edu.vn/uploads/sys/logo-dhbk-1-02_130_191.png"><em style="color: #ffffff;margin-right: 9px;">HUST</em> <span style="color: #f2c208;"> Tools</span></a>
           </div>
