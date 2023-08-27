@@ -8,6 +8,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
+    <style>
+        .card-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+    </style>
+    
 </head>
 <body>
     <div class="container">
@@ -50,7 +59,7 @@
                 `<div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">${activity.ActivityName}</h5>
+                            <h5 class="card-title ellipsis">${activity.ActivityName}</h5>
                             <p class="card-text">ID: ${activity.ActivityID}</p>
                             <p class="card-text">Start Date: ${formatDate(activity.StartTime)}</p>
                             <p class="card-text">Finish Date: ${formatDate(activity.FinishTime)}</p>
