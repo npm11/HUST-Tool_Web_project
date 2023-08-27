@@ -68,7 +68,7 @@ def find_largest_activity_id(start_id):
     largest_id = None
     activity_id = start_id
     gap_count = 0
-    while gap_count < 50:
+    while gap_count < 200:
         if check_activity(activity_id):
             largest_id = activity_id
             gap_count = 0
