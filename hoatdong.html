@@ -13,10 +13,16 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
     <!-- Your additional styles here -->
+    <style>
+        /* Thêm khoảng cách ở đầu trang */
+        body {
+            padding-top: 80px;  /* Điều chỉnh khoảng cách tùy ý */
+        }
+    </style>
 </head>
 <body>
     <!-- Copy the header from your homepage -->
-    <header class="main-header clearfix" role="header">
+    <header class="main-header clearfix" role="header" style="position: fixed; width: 100%; top: 0; z-index: 1000;">
         <div class="logo">
             <a href="#" style="display: flex; align-items: center;"><img style="height: 58.4615384615px; width: 40px; margin-right: 13px;" alt="Logo" src="https://hust.edu.vn/uploads/sys/logo-dhbk-1-02_130_191.png"><em style="color: #ffffff;margin-right: 9px;">HUST</em> <span style="color: #f2c208;"> Tools</span></a>
           </div>
@@ -24,20 +30,12 @@
           <nav id="menu" class="main-nav" role="navigation">
             <ul class="main-menu">
               <li><a href="index.html" class="active">Trang chủ</a></li>
-              <li class="has-submenu"><a href="#">Thi thử</a>
-                  <ul class="sub-menu">
-                  <li><a href="quiz.html?quiz=ktmt" rel="sponsored" class="external">Thực hành KTMT</a></li>
-                  <li><a href="quiz.html?quiz=csdl" rel="sponsored" class="external">Cơ sở dữ liệu</a></li>
-                      <!-- Add more quizzes here -->
-                  </ul>
-              </li>
               <li><a href="https://soict.hust.edu.vn/">SOICT</a></li>
-              <li><a href="hoatdong.html">Các hoạt động</a></li>
               <li><a href="https://npmnpm1111.github.io/hustexam/QRcode.jpg">Donate</a></li>
               <li><a href="https://www.facebook.com/manhphngz/">Liên hệ</a></li>
             </ul>
           </nav>
-        </header>
+    </header>
     <div class="container">
         <h1 class="text-center mt-4 mb-4">Danh sách các hoạt động mới nhất</h1>
         <div id="activityList" class="row">
