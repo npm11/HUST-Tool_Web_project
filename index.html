@@ -140,7 +140,7 @@
         </div>
         <div class="col-lg-4 col-12">
           <div class="features-post third-features">
-            <div class="features-content">  
+            <div class="features-content">
                 <div class="content-show" style="display: flex; justify-content: center;">
                     <i class="fa fa-book" style="margin-right: 10px;"></i>
                     <h4 style="font-size: 17px;"> Copyright ©</h4>
@@ -264,23 +264,6 @@
                  $('.submenu').hide();
             }
         });
-        function getActivities() {
-        $.ajax({
-          url: 'http://localhost:5000/get_activities',
-          type: 'GET',
-          success: function(response) {
-            $('#activitiesList').html(response);
-          },
-          error: function(error) {
-            console.log(error);
-          }
-        });
-      }
-
-      // Event listener for the "Get Activities" button
-      $('#getActivitiesBtn').click(function() {
-        getActivities();
-      });
     </script>
 </body>
 </html>
