@@ -1,27 +1,20 @@
 from flask import Flask, jsonify
-from flask_cors import CORS
+from flask_cors import CORS  # Thêm dòng này
 import requests
 import json
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # Thêm dòng này
 
+# Biến toàn cục để lưu dữ liệu
 cached_data = None
-
-def write_to_html_file(data):
-    with open("hoatdong.html", "w") as f:
-        f.write("<html><body><table>")
-        f.write("<tr><th>Activity ID</th><th>Activity Name</th></tr>")
-        for activity in data:
-            f.write(f"<tr><td>{activity['ActivityID']}</td><td>{activity['ActivityName']}</td></tr>")
-        f.write("</table></body></html>")
 
 @app.route('/get_activities', methods=['GET'])
 def get_activities():
     global cached_data
     if cached_data is None:
+        # Tải dữ liệu và lưu vào biến cached_data
         cached_data = fetch_data_from_source()
-        write_to_html_file(cached_data)
     return jsonify(cached_data)
 
 def fetch_data_from_source():
@@ -39,7 +32,7 @@ def fetch_data_from_source():
 def check_activity(activity_id):
     url = "https://ctsv.hust.edu.vn/api-t/Activity/GetActivityById"
     headers = {
-        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkZNU3BaNmFOa1JBOXN5ZzJLNl9HMlhUdzZLQSIsImtpZCI6IkZNU3BaNmFOa1JBOXN5ZzJLNl9HMlhUdzZLQSJ9.eyJhdWQiOiJodHRwczovL2N0c3YuaHVzdC5lZHUudm4iLCJpc3MiOiJodHRwczovL2Fzc28uaHVzdC5lZHUudm4vYWRmcyIsImlhdCI6MTY5MzA4NTAwNSwiZXhwIjoxNjkzMDg4NjA1LCJhdXRoX3RpbWUiOjE2OTMwODA4ODUsIm5vbmNlIjoiYWY5MzU2NTAtNjEwNC00NjlkLWI2ZTQtYWJhMGJkMjBkZjAzIiwic3ViIjoiSnVEc09RV09RWDhiSWVwcklNMGI2dlo1NGg4S1pnemRFbXdsY2RBMjVwMD0iLCJ1cG4iOiJtYW5oLm5wMjE1MDg3QHNpcy5odXN0LmVkdS52biIsInVuaXF1ZV9uYW1lIjoiSFVTVFxcTWFuaC5OUDIxNTA4NyIsInB3ZF91cmwiOiJodHRwczovL2Fzc28uaHVzdC5lZHUudm4vYWRmcy9wb3J0YWwvdXBkYXRlcGFzc3dvcmQvIiwic2lkIjoiUy0xLTUtMjEtMjc0NjI1MTAwNy0xMzI0NTk1MjA2LTc4MTY1NDM1MS04ODA4MiJ9.VS50ZPhivXQCvnSxDOf1dGsEG37pCH1qFF5SbwgpdBtrqu69PJyW58iJt1GzDxHKKS_VNx8-R2Q7YBC7PbwusWuWUzjVEGv-lFF8D0wHInlj7umgGvyk78tQuzKdmtDiVyfQKYZ6ZlFcATst0TwVAYiKA8waF1hRoJn8ZIREcWKmUghFyO1IhRsVgfFgMyWriQpWYN8pv0ljC5mVO5hMB1kcaDfCHBsCeLFCejr7g4Gsxgzyc3XIqSE00C5EeuZ6aiHHJufb3qiOWCMEzTn0Yo8MhZpRGYB-WVOetLP_JYGatJW3iGBgnj3sGyNPodpzYL0mAdnv03vOnz9H4RZSIg",  # Thay thế <Your-Token-Here> với token của bạn
+        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkZNU3BaNmFOa1JBOXN5ZzJLNl9HMlhUdzZLQSIsImtpZCI6IkZNU3BaNmFOa1JBOXN5ZzJLNl9HMlhUdzZLQSJ9.eyJhdWQiOiJodHRwczovL2N0c3YuaHVzdC5lZHUudm4iLCJpc3MiOiJodHRwczovL2Fzc28uaHVzdC5lZHUudm4vYWRmcyIsImlhdCI6MTY5MzExNjE3NCwiZXhwIjoxNjkzMTE5Nzc0LCJhdXRoX3RpbWUiOjE2OTMxMTYxNzQsIm5vbmNlIjoiYzRiMjk2NmUtNDU2MS00OWE2LTgxYmEtMmMxM2NkNmYxMmY0Iiwic3ViIjoiSnVEc09RV09RWDhiSWVwcklNMGI2dlo1NGg4S1pnemRFbXdsY2RBMjVwMD0iLCJ1cG4iOiJtYW5oLm5wMjE1MDg3QHNpcy5odXN0LmVkdS52biIsInVuaXF1ZV9uYW1lIjoiSFVTVFxcTWFuaC5OUDIxNTA4NyIsInB3ZF91cmwiOiJodHRwczovL2Fzc28uaHVzdC5lZHUudm4vYWRmcy9wb3J0YWwvdXBkYXRlcGFzc3dvcmQvIiwic2lkIjoiUy0xLTUtMjEtMjc0NjI1MTAwNy0xMzI0NTk1MjA2LTc4MTY1NDM1MS04ODA4MiJ9.oK6zcAXaqra2skh-Y4q7-Xbf2jkkCaMwpkFpf0-evx3fpvgWcpSN1C5cVCxYW74ovgmqK6uAGtBVwneav1Dw6F0HFhLZdNE8Y6hYiuhIrwweJJCp301OT9wL4MdsTjRQWR438hgqb7bxmcLzjDE8SEcmIE7NA2l8gOlRF2TsFac5DwlKaNtZSw5PP3viiBHyWpopKVgVQzkTUutTpwkJspBgiGpTVs26cD9BjE9yNABcF26d_mEN5JiDx4cogiPmH-2_furalXyl3-xQxgmAanK_RHCUn207oE3z6P9TqEuYddGqZEZ_TTaoQYO-xZCEGsyeLzcizZSsuiObR1BuXw",  # Thay thế <Your-Token-Here> với token của bạn
         "Content-Type": "application/json",
     }
     payload = json.dumps({"Aid": activity_id})
@@ -58,7 +51,7 @@ def find_largest_activity_id(start_id):
     largest_id = None
     activity_id = start_id
     gap_count = 0
-    while gap_count < 50:
+    while gap_count < 100:
         if check_activity(activity_id):
             largest_id = activity_id
             gap_count = 0

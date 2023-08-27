@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hoạt Động</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js"></script>
 </head>
 <body>
     <h1>Danh sách hoạt động</h1>
@@ -21,12 +24,31 @@
     </table>
 
     <script>
+        var firebaseConfig = {
+  apiKey: "AIzaSyBp6IG5Za_idPrJ485nf2kD4oi1G-XgrCs",
+  authDomain: "husttools.firebaseapp.com",
+  projectId: "husttools",
+  storageBucket: "husttools.appspot.com",
+  messagingSenderId: "424219374947",
+  appId: "1:424219374947:web:41de76cd8390edc94fcf56",
+  measurementId: "G-CWT9EQ05RN"
+};
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+
         $(document).ready(function() {
             $.get("http://localhost:5000/get_activities", function(data) {
                 data.forEach(function(activity) {
                     $("#activityTable tbody").append(
                         `<tr><td>${activity.ActivityID}</td><td>${activity.ActivityName}</td></tr>`
                     );
+
+                    // Lưu dữ liệu vào Firestore
+                    db.collection("activities").add({
+                        ActivityID: activity.ActivityID,
+                        ActivityName: activity.ActivityName
+                    });
                 });
             });
         });
