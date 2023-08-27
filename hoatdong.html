@@ -16,6 +16,8 @@
             <tr>
                 <th>Activity ID</th>
                 <th>Activity Name</th>
+                <th>Start Time</th> <!-- Thêm cột này -->
+                <th>Finish Time</th> <!-- Thêm cột này -->
             </tr>
         </thead>
         <tbody>
@@ -44,7 +46,12 @@
                 $("#activityTable tbody").empty();
                 data.forEach(function(activity) {
                     $("#activityTable tbody").append(
-                        `<tr><td>${activity.ActivityID}</td><td>${activity.ActivityName}</td></tr>`
+                        `<tr>
+                            <td>${activity.ActivityID}</td>
+                            <td>${activity.ActivityName}</td>
+                            <td>${activity.StartTime}</td> <!-- Thêm dòng này -->
+                            <td>${activity.FinishTime}</td> <!-- Thêm dòng này -->
+                        </tr>`
                     );
                 });
             });

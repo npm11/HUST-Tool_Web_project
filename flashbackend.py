@@ -6,7 +6,7 @@ import firebase_admin
 from firebase_admin import credentials, db
 
 # Khởi tạo Firebase
-cred = credentials.Certificate("D:\npmdz.json")
+cred = credentials.Certificate(r"D:\npmdz.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://husttools-default-rtdb.firebaseio.com/'
 })
@@ -20,24 +20,29 @@ cached_data = None
 @app.route('/get_activities', methods=['GET'])
 def get_activities():
     global cached_data
-    if cached_data is None:
-        # Tải dữ liệu và lưu vào biến cached_data
-        cached_data = fetch_data_from_source()
-        # Lưu dữ liệu vào Firebase
-        db.reference('activities').set(cached_data)
+    # Đọc dữ liệu hiện tại từ Firebase
+    ref = db.reference('activities')
+    current_data = ref.get()
+    largest_saved_id = max([activity['ActivityID'] for activity in current_data]) if current_data else 8720
+
+    # Tải và lưu các hoạt động mới
+    new_activities = fetch_data_from_source(largest_saved_id + 1)
+    if new_activities:
+        cached_data = current_data + new_activities if current_data else new_activities
+        ref.set(cached_data)
+    else:
+        cached_data = current_data
+
     return jsonify(cached_data)
 
-def fetch_data_from_source():
+def fetch_data_from_source(start_id):
     activities = []
-    start_checking_from_id = 8720
-    largest_id = find_largest_activity_id(start_checking_from_id)
+    largest_id = find_largest_activity_id(start_id)
     if largest_id is not None:
-        for activity_id in range(start_checking_from_id, largest_id + 1):
+        for activity_id in range(start_id, largest_id + 1):
             activity_data = check_activity(activity_id)
             if activity_data:
                 activities.append(activity_data)
-        # Lưu dữ liệu vào Firebase
-        db.reference('activities').set(activities)
     return activities
 
 def check_activity(activity_id):
@@ -54,10 +59,11 @@ def check_activity(activity_id):
             for activity in resp_data.get("Activities", []):
                 return {
                     "ActivityID": activity_id,
-                    "ActivityName": activity.get('AName', 'Unknown Name')
+                    "ActivityName": activity.get('AName', 'Unknown Name'),
+                    "StartTime": activity.get('StartTime', 'Unknown Start Time'),
+                    "FinishTime": activity.get('FinishTime', 'Unknown Finish Time')
                 }
     return None
-
 def find_largest_activity_id(start_id):
     largest_id = None
     activity_id = start_id
