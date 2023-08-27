@@ -16,8 +16,8 @@
             <tr>
                 <th>Activity ID</th>
                 <th>Activity Name</th>
-                <th>Start Time</th> <!-- Thêm cột này -->
-                <th>Finish Time</th> <!-- Thêm cột này -->
+                <th>Start Date</th>
+                <th>Finish Date</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +39,10 @@
         };
         firebase.initializeApp(firebaseConfig);
 
+        function formatDate(dateString) {
+            return dateString.split(" ")[0];
+        }
+
         $(document).ready(function() {
             var activitiesRef = firebase.database().ref('activities');
             activitiesRef.on('value', function(snapshot) {
@@ -49,8 +53,8 @@
                         `<tr>
                             <td>${activity.ActivityID}</td>
                             <td>${activity.ActivityName}</td>
-                            <td>${activity.StartTime}</td> <!-- Thêm dòng này -->
-                            <td>${activity.FinishTime}</td> <!-- Thêm dòng này -->
+                            <td>${formatDate(activity.StartTime)}</td>
+                            <td>${formatDate(activity.FinishTime)}</td>
                         </tr>`
                     );
                 });
