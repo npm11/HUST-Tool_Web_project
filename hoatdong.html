@@ -3,22 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Các hoạt động</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Hoạt Động</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/styleindex.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
-    <style>
-        .card-title {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
-        }
-    </style>
-    
+    <!-- Your additional styles here -->
 </head>
 <body>
+    <!-- Copy the header from your homepage -->
+    <header class="main-header clearfix" role="header">
+        <div class="logo">
+            <a href="#" style="display: flex; align-items: center;"><img style="height: 58.4615384615px; width: 40px; margin-right: 13px;" alt="Logo" src="https://hust.edu.vn/uploads/sys/logo-dhbk-1-02_130_191.png"><em style="color: #ffffff;margin-right: 9px;">HUST</em> <span style="color: #f2c208;"> Tools</span></a>
+          </div>
+          <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
+          <nav id="menu" class="main-nav" role="navigation">
+            <ul class="main-menu">
+              <li><a href="index.html" class="active">Trang chủ</a></li>
+              <li class="has-submenu"><a href="#">Thi thử</a>
+                  <ul class="sub-menu">
+                  <li><a href="quiz.html?quiz=ktmt" rel="sponsored" class="external">Thực hành KTMT</a></li>
+                  <li><a href="quiz.html?quiz=csdl" rel="sponsored" class="external">Cơ sở dữ liệu</a></li>
+                      <!-- Add more quizzes here -->
+                  </ul>
+              </li>
+              <li><a href="https://soict.hust.edu.vn/">SOICT</a></li>
+              <li><a href="hoatdong.html">Các hoạt động</a></li>
+              <li><a href="https://npmnpm1111.github.io/hustexam/QRcode.jpg">Donate</a></li>
+              <li><a href="https://www.facebook.com/manhphngz/">Liên hệ</a></li>
+            </ul>
+          </nav>
+        </header>
     <div class="container">
         <h1 class="text-center mt-4 mb-4">Danh sách các hoạt động mới nhất</h1>
         <div id="activityList" class="row">
