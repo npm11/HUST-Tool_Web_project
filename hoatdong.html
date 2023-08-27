@@ -40,7 +40,8 @@
         firebase.initializeApp(firebaseConfig);
 
         function formatDate(dateString) {
-            return dateString.split(" ")[0];
+            const [year, month, day] = dateString.split(" ")[0].split("-");
+            return `${day}-${month}-${year}`;
         }
 
         $(document).ready(function() {
