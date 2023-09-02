@@ -128,10 +128,12 @@
     </header>
     <div class="container">
         <h1 class="text-center mt-4 mb-4">Danh sách các hoạt động mới nhất</h1>
+        <p id="lastUpdated" class="text-center mb-4">Cập nhật lần cuối: </p>  <!-- Thêm dòng này -->
         <div id="activityList" class="row">
             <!-- Các card hoạt động sẽ được thêm vào đây bằng JavaScript -->
         </div>
     </div>
+    
 
     <!-- Your JavaScript code here -->
     <script>
@@ -185,7 +187,14 @@
             $(".menu-link").click(function(e) {
                 e.preventDefault();
                 $("#menu").toggleClass("active");
-            });
+                var lastUpdatedRef = firebase.database().ref('lastUpdated');
+    lastUpdatedRef.on('value', function(snapshot) {
+        var lastUpdated = snapshot.val();
+        if (lastUpdated && lastUpdated.time) {
+            $("#lastUpdated").text("Cập nhật lần cuối: " + lastUpdated.time);
+        }
+    });
+});
         });
     </script>
 </body>
