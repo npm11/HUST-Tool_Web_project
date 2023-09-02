@@ -156,6 +156,13 @@
         }
 
         $(document).ready(function() {
+            var lastUpdatedRef = firebase.database().ref('lastUpdated');
+    lastUpdatedRef.on('value', function(snapshot) {
+        var lastUpdated = snapshot.val();
+        if (lastUpdated && lastUpdated.time) {
+            $("#lastUpdated").text("Cập nhật lần cuối: " + lastUpdated.time);
+        }
+    });
     var activitiesRef = firebase.database().ref('activities');
     activitiesRef.on('value', function(snapshot) {
         var data = snapshot.val();
@@ -187,13 +194,7 @@
             $(".menu-link").click(function(e) {
                 e.preventDefault();
                 $("#menu").toggleClass("active");
-                var lastUpdatedRef = firebase.database().ref('lastUpdated');
-    lastUpdatedRef.on('value', function(snapshot) {
-        var lastUpdated = snapshot.val();
-        if (lastUpdated && lastUpdated.time) {
-            $("#lastUpdated").text("Cập nhật lần cuối: " + lastUpdated.time);
-        }
-    });
+
 });
         });
     </script>
