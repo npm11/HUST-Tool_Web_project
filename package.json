@@ -2,7 +2,7 @@
   "name": "hustexam-1",
   "version": "1.0.0",
   "description": "",
-  "main": "src/js/quiz.js",
+  "main": "quiz.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
