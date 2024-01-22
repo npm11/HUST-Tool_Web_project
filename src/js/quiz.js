@@ -277,7 +277,7 @@
             "myUniqueKey",
             JSON.stringify({ result: result, score: score })
           );
-          window.location.href = "src/html/result.html"; // Thay thế hàm showModal
+          window.location.href = "result.html"; // Thay thế hàm showModal
         }
       );
     } else {
@@ -290,7 +290,7 @@
             "myUniqueKey",
             JSON.stringify({ result: result, score: score })
           );
-          window.location.href = "src/html/result.html"; // Thay thế hàm showModal
+          window.location.href = "result.html"; // Thay thế hàm showModal
         }
       );
     }
