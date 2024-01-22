@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <title>Quiz</title>
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <link rel="stylesheet" type="text/css" href="assets/css/stylesquiz.css" />
+  </head>
+  <body>
+    <div id="confirmModal" class="modal">
+      <div class="modal-content">
+        <p id="confirmModalText"></p>
+        <div class="button-group">
+          <button id="confirmModalYes" class="btn btn-primary">Yes</button>
+          <button id="confirmModalNo" class="btn btn-secondary">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="warningModal" class="modal">
+      <div class="modal-content">
+        <p id="warningModalText"></p>
+        <div class="button-group">
+          <button id="warningModalYes" class="btn btn-primary">Yes</button>
+          <button id="warningModalNo" class="btn btn-secondary">No</button>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button
+        onclick="location.href='src/html/index.html'"
+        class="btn btn-primary"
+      >
+        Trang chủ
+      </button>
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Thi thử
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="src/html/quiz.html?quiz=ktmt">KTMT</a>
+          <!-- Add more quizzes here -->
+        </div>
+      </div>
+    </nav>
+    <h1 class="text-center">Quiz</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <div id="questionList"></div>
+          <div class="submit-button-container">
+            <div id="countdown" class="countdown"></div>
+            <button type="submit" form="quiz" class="btn btn-primary mt-0">
+              Submit Quiz
+            </button>
+          </div>
+        </div>
+        <div class="col-12 col-md-8">
+          <form
+            id="quiz"
+            onsubmit="event.preventDefault(); submitQuiz();"
+          ></form>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="dist/main.js"></script>
+  </body>
+</html>
